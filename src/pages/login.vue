@@ -43,10 +43,10 @@
 
 
 <template>
-  <v-app class="gradient-bg">
+  <v-app class="background">
     <v-main>
         <v-container class="fill-height d-flex justify-center align-center">
-            <v-card class="mx-auto d-flex align-center flex-column pa-2" prepend-icon="$vuetify" width="400" variant="outlined" color="indigo"> 
+            <v-card class="mx-auto d-flex align-center flex-column pa-2 glass-card" prepend-icon="$vuetify" width="400" variant="outlined" color="white"> 
                 <template v-slot:title > <span class="font-weight-black" >Welcome to Axis App</span> </template>
                 <v-card-text class="w-100 mt-5">
                     <v-form @submit.prevent='login' ref="form">
@@ -64,13 +64,23 @@
 
 
 <style scoped>
-.gradient-bg {
-  min-height: 100vh;
-
-  background: linear-gradient(
-    125deg,
-    rgb(var(--v-theme-primary)),
-    #ffffff
-  );
+.background {
+  background-image: url('@/assets/loginBackground.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.045);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255, 255, 255, 0.147);
+
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+
 </style>
