@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import { ref } from 'vue';
+    import router from '@/router';
 
     const email = ref<string>('')
     const password = ref<string>('')
@@ -35,9 +36,7 @@
             return
         }
 
-        alert('Sign in realizado com sucesso')
-        email.value = ''
-        password.value = ''
+        router.push({ name: 'dashboard'})
     }
 </script>
 
