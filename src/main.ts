@@ -16,8 +16,11 @@ import App from './App.vue'
 // Styles
 import 'unfonts.css'
 
+import router from './router/index.ts'
+
 const app = createApp(App)
 
 registerPlugins(app)
 
 app.mount('#app')
+app.use(router)

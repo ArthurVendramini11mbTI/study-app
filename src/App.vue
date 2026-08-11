@@ -6,7 +6,7 @@
 <template>
   <v-app>
     <v-main>
-      <login/>
+      <router-view/>
     </v-main>
   </v-app>
 </template>

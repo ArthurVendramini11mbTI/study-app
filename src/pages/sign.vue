@@ -35,7 +35,7 @@
             return
         }
 
-        alert('Login realizado com sucesso')
+        alert('Sign in realizado com sucesso')
         email.value = ''
         password.value = ''
     }
@@ -47,7 +47,7 @@
     <v-main>
         <v-container class="fill-height d-flex justify-center align-center">
             <v-card class="mx-auto d-flex align-center flex-column pa-2 glass-card"  width="400" variant="outlined" color="white"> 
-                <template v-slot:title > <span class="font-weight-black" >Log in to Axis App</span> </template>
+                <template v-slot:title > <span class="font-weight-black" >Sign in to Axis App</span> </template>
                 <v-card-text class="w-100 mt-5">
                     <v-form @submit.prevent='login' ref="form">
                     <v-text-field label="Email" v-model="email" :rules="emailRules"></v-text-field>
@@ -55,7 +55,7 @@
 
                     <v-btn type="submit" class="w-100 mt-5" variant="outlined">Submit</v-btn>
                     
-                    <v-chip variant="text" class="mt-2">Don't have an account?<router-link to="/sign" class="ml-1">Sign in</router-link></v-chip>
+                    <v-chip variant="text" class="mt-2">Already have an account?<router-link to="/" class="ml-1">Log in</router-link></v-chip>
                     </v-form>
                 </v-card-text>
             </v-card>
