@@ -43,11 +43,11 @@
 
 
 <template>
-  <v-app >
+  <v-app class="gradient-bg">
     <v-main>
         <v-container class="fill-height d-flex justify-center align-center">
-            <v-card class="mx-auto d-flex align-center flex-column pa-2" prepend-icon="$vuetify" width="400" variant="tonal" color="indigo"> 
-                <template v-slot:title> <span class="font-weight-black">Welcome to Axis App</span> </template>
+            <v-card class="mx-auto d-flex align-center flex-column pa-2" prepend-icon="$vuetify" width="400" variant="outlined" color="indigo"> 
+                <template v-slot:title > <span class="font-weight-black" >Welcome to Axis App</span> </template>
                 <v-card-text class="w-100 mt-5">
                     <v-form @submit.prevent='login' ref="form">
                     <v-text-field label="Email" v-model="email" :rules="emailRules"></v-text-field>
@@ -62,3 +62,15 @@
   </v-app>
 </template>
 
+
+<style scoped>
+.gradient-bg {
+  min-height: 100vh;
+
+  background: linear-gradient(
+    125deg,
+    rgb(var(--v-theme-primary)),
+    #ffffff
+  );
+}
+</style>
