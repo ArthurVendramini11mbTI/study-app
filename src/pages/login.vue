@@ -43,7 +43,6 @@
 
 <template>
   <v-app class="background">
-    <v-main>
         <v-container class="fill-height d-flex justify-center align-center">
             <v-card class="mx-auto d-flex align-center flex-column pa-2 glass-card"  width="400" variant="outlined" color="white"> 
                 <template v-slot:title > <span class="font-weight-black" >Log in to Axis App</span> </template>
@@ -59,7 +58,6 @@
                 </v-card-text>
             </v-card>
         </v-container>
-    </v-main>
   </v-app>
 </template>
 
