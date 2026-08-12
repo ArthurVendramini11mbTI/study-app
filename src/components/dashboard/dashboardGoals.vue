@@ -1,7 +1,9 @@
 <script lang="ts"></script>
 
 <template>
-    <v-main class="border"></v-main>
+    <v-main class="border">
+        <h1>opi</h1>
+    </v-main>
 </template>
 
 <style>
