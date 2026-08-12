@@ -61,25 +61,3 @@
   </v-app>
 </template>
 
-
-<style scoped>
-.background {
-  background-image: url('@/assets/loginBackground.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-  .glass-card {
-    background: rgba(255, 255, 255, 0.045);
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  border: 1px solid rgba(255, 255, 255, 0.147);
-
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-}
-
-
-</style>

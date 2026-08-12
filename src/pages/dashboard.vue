@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import dashboardCalendar from '@/components/dashboard/dashboardCalendar.vue';
-import DashboardGoals from '@/components/dashboard/dashboardGoals.vue';
+import CreateGoal from '@/components/dashboard/dashboardGoals/createGoal.vue';
+import DashboardGoals from '@/components/dashboard/dashboardGoals/dashboardGoals.vue';
 import DashboardSideBar from '@/components/dashboard/dashboardSideBar.vue';
 import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
 
 </script>
 
 <template>
+        <CreateGoal/>
     <v-row no-gutters>
 
             <v-col cols="0">

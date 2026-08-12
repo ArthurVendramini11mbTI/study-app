@@ -15,8 +15,7 @@ import App from './App.vue'
 
 // Styles
 import 'unfonts.css'
-
-import router from './router/index.ts'
+import '@/styles/global.scss'
 
 const app = createApp(App)
 
