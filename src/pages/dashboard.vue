@@ -8,12 +8,8 @@ import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
 
 <template>
     <v-row no-gutters>
-        <v-col cols="3">
-            <DashboardSideBar />
-        </v-col>
-
-        <v-col cols="9">
-            <v-row>
+            <v-row no-gutters>
+                <DashboardSideBar />
                 <DashboardUpperBar />
             </v-row>
 
@@ -26,6 +22,5 @@ import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
                     <DashboardGoals />
                 </v-col>
             </v-row>
-        </v-col>
     </v-row>
 </template>
