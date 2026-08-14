@@ -9,19 +9,19 @@ import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
 
 <template>
 
-    <v-row no-gutters>
+    <v-row class="backgroudDashboard pa-10">
 
-            <v-col cols="0">
+            <v-col cols="2">
                 <DashboardSideBar />
                         
             </v-col>
 
-            <v-col cols="12" no-gutters>
+            <v-col cols="10" >
                 <v-row>
                     <DashboardUpperBar />
                 </v-row>
 
-                <v-row no-gutters>
+                <v-row>
                     <v-col cols="9">
                         <dashboardCalendar />
                     </v-col>
@@ -34,3 +34,13 @@ import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
             </v-col>
     </v-row>
 </template>
+
+<style scope>
+    .backgroudDashboard{
+        background-image: url('@/assets/dashboardBackground.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+</style>

@@ -1,40 +1,23 @@
 <template>
-  <v-card>
-      <v-navigation-drawer
-        expand-on-hover
-        permanent
-        rail
-        class="glass-card border-0"
-      >
-        <v-list>
-          <v-list-item
-            prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-            subtitle="sandra_a88@gmailcom"
-            title="Shiny Alberto"
-          ></v-list-item>
-        </v-list>
+  <v-card color="transparent" flat>
+    <v-layout>
+      <v-navigation-drawer theme="dark" permanent class="glass-card">
+        <v-list nav class="bg-transparent">
+          <v-list-item prepend-icon="mdi-home" title="Dashboard" value="dashboard"/>
 
-        <v-divider></v-divider>
+          <v-list-item prepend-icon="mdi-calendar" title="Calendar" value="calendar"/>
 
-        <v-list density="compact" nav>
-          <v-list-item prepend-icon="mdi-folder" title="My Files" value="myfiles"></v-list-item>
-          <v-list-item prepend-icon="mdi-account" title="Account" value="account"></v-list-item>
-          <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
+          <v-list-item prepend-icon="mdi-flag" title="Goals" value="goals"/>
+
+          <v-list-item prepend-icon="mdi-book" title="Subjects" value="subjects"/>
+
+          <v-list-item prepend-icon="mdi-" title="Progress" value="progress"/>
+
+          <v-list-item prepend-icon="mdi-settings" title="Settings" value="settings"/>
         </v-list>
       </v-navigation-drawer>
+
+      <v-main style="height: 500px" />
+    </v-layout>
   </v-card>
 </template>
-
-<style scoped>
-    .glass-card {
-        background: linear-gradient(
-            135deg,
-            #0f172a 0%,
-            #111827 50%,
-            #1e293b 100%
-        );
-    }
-
-
-
-</style>
