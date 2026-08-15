@@ -8,12 +8,10 @@ import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
 </script>
 
 <template>
-
-    <v-row class="backgroudDashboard pa-10">
+    <v-row class="backgroudDashboard pa-10 overflow-hidden" style="height: 100vh;">
 
             <v-col cols="2">
-                <DashboardSideBar />
-                        
+                <DashboardSideBar />    
             </v-col>
 
             <v-col cols="10" >
@@ -22,8 +20,7 @@ import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
                 </v-row>
 
                 <v-row>
-                    <v-col cols="9">
-                        <dashboardCalendar />
+                    <v-col cols="9" class="d-flex">
                     </v-col>
 
                     <v-col cols="3">

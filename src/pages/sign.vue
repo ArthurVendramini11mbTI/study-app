@@ -44,7 +44,7 @@
 <template>
   <v-app class="background">
         <v-container class="fill-height d-flex justify-center align-center">
-            <v-card class="mx-auto d-flex align-center flex-column pa-2 glass-card"  width="400" variant="outlined" color="white"> 
+            <v-card class="mx-auto d-flex align-center flex-column pa-2 light-glass-card"  width="400" variant="outlined" color="white"> 
                 <template v-slot:title > <span class="font-weight-black" >Sign in to Axis App</span> </template>
                 <v-card-text class="w-100 mt-5">
                     <v-form @submit.prevent='login' ref="form">
