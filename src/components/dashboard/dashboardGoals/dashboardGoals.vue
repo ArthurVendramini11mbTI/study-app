@@ -55,9 +55,9 @@
           />
         </div>
 
-        <div class="d-flex align-center ga-2 " style="width: 30%;">
+        <div class="d-flex align-center ga-2" style="width: 30%;">
           <p>{{ goal.progress }}%</p>
-          <v-chip :color="goal.status.color"  class="w-100 d-flex justify-center">
+          <v-chip :color="goal.status.color" class="w-100 d-flex justify-center">
             {{ goal.status.text }}
           </v-chip>
         </div>
@@ -67,7 +67,7 @@
   </v-card>
 </template>
 
-<style setup>
+<style scoped>
     .card:hover{
     transform: translateY(-1px);
     color: white;

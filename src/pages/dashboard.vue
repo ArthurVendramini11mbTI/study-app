@@ -8,7 +8,8 @@ import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
 </script>
 
 <template>
-    <v-row class="backgroudDashboard pa-10 overflow-hidden" style="height: 100vh;">
+    <v-row class=" pa-10 overflow-hidden" style="height: 100vh; background-color: #212121
+">
 
             <v-col cols="2">
                 <DashboardSideBar />    
