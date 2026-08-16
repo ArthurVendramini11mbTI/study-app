@@ -1,39 +1,29 @@
 <script setup lang="ts"> 
   import { createGoalCard } from '@/composables/goal';
+  import { GoalsSchema } from '@/types/goals';
 
-      const goals = [
-        {
-            title: 'Estudar Node',
-            icon: '$vuetify',
-            status: {
-              text: 'In progress',
-              color: 'blue',
-            },
-            color: 'blue',
-            progress: 50
-        },
-        {
-            title: 'Estudar MySQL',
-            icon: '$command',
-            status: {
-              text: 'Almost Done',
-              color: 'purple',
-            },
-            color: 'red',
-            progress: 95
-        },
-        {
-            title: 'Estudar Adonis',
-            icon: '$eyeDropper',
-            status: {
-              text: 'At risk',
-              color: 'red',
-            },
-            color: 'yellow',
-            progress: 30
-        }
-        
-    ]
+  const goals = GoalsSchema.parse([
+    {
+      title: 'Estudar Node',
+      icon: '$vuetify',
+      color: 'blue',
+      progress: 50,
+    },
+
+    {
+      title: 'Estudar MySQL',
+      icon: '$command',
+      color: 'red',
+      progress: 95,
+    },
+
+    {
+      title: 'Estudar Adonis',
+      icon: '$eyeDropper',
+      color: 'yellow',
+      progress: 5,
+    },
+  ])
 </script>
 
 <template>
