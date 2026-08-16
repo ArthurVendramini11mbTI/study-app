@@ -80,7 +80,7 @@
 
 .item:hover {
 
-    transform: translateY(-3px);
+  transform: translateY(-3px);
   color: white;
 
   background: linear-gradient(
@@ -94,12 +94,8 @@
   box-shadow:
     0 0 12px rgba(139, 92, 246, 0.35),
     inset 0 0 12px rgba(139, 92, 246, 0.08);
-}
 
-.item:hover {
-  color: #ffff;
-
-   .menu-icon{
+  .menu-icon{
     color: #ffff;
    }
 }

@@ -20,13 +20,23 @@ import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
                 </v-row>
 
                 <v-row>
-                    <v-col cols="9" class="d-flex">
-                    </v-col>
+                </v-row>
 
-                    <v-col cols="3">
+                <v-row>
+                    <v-col cols="6" >
                         <DashboardGoals />
                         <CreateGoal/>
                     </v-col>
+
+                    <v-col cols="6">
+                        <dashboardCalendar/>
+                    </v-col>
+                </v-row>
+
+                <v-row>
+                </v-row>
+
+                <v-row>
                 </v-row>
             </v-col>
     </v-row>

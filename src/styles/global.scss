@@ -12,20 +12,31 @@ body,
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 
-  border: 1px solid rgba(255, 255, 255, 0.147);
 
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
-.dark-glass-card {
-    background: rgba(10, 10, 10, 0.079);
+.dark-glass-item {
+  background: rgba(255, 255, 255, 0.045);
 
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 
-  border: 1px solid rgba(255, 255, 255, 0.147);
-
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+
+  
+}
+
+
+.dark-glass-card {
+  background: rgba(10, 10, 10, 0.079);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  
+  border: none;
+
 }
 
 
@@ -34,4 +45,23 @@ body,
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.btn:hover {
+
+  transform: translateY(-1px);
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.28),
+    rgba(99, 102, 241, 0.18)
+  );
+
+  border-color: rgba(167, 139, 250, 0.55);
+
+  box-shadow:
+    0 0 12px rgba(139, 92, 246, 0.35),
+    inset 0 0 12px rgba(139, 92, 246, 0.08);
+
 }
