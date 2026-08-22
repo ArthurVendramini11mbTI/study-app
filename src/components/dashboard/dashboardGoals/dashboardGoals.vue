@@ -27,7 +27,7 @@
 </script>
 
 <template>
-  <v-card class="mx-auto h-100 dark-glass-card rounded-xl pa-2 ">
+  <v-card class="mx-auto h-100 light-glass-card rounded-xl pa-2 ">
 
     <div class="d-flex justify-space-between align-center mb-2">
             <p>Study Goals</p>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="d-flex flex-column overflow-y-hidden ga-2 w-100">
-      <v-card  class="mx-auto w-100 light-glass-card card rounded-lg d-flex justify-space-between align-center pr-5 pl-5" v-for="goal in goals">
+      <v-card  class="mx-auto w-100  inner-card card rounded-lg d-flex justify-space-between align-center pr-5 pl-5" v-for="goal in goals">
         <div>
           <v-icon :icon="goal.icon" :color="goal.color"></v-icon>
         </div>
@@ -67,21 +67,4 @@
   </v-card>
 </template>
 
-<style scoped>
-    .card:hover{
-    transform: translateY(-1px);
-    color: white;
 
-    background: rgba(255, 255, 255, 0.045);
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-
-
-  box-shadow:
-    0 0 12px rgba(139, 92, 246, 0.35),
-    inset 0 0 12px rgba(139, 92, 246, 0.08);
-    }
-</style>

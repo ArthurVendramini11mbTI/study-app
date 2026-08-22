@@ -5,7 +5,7 @@
 <template>
   <div class="pa-4 text-center ">
     <v-dialog v-model="createGoalCard" max-width="500" >
-      <v-card prepend-icon="mdi-flag" title="Create a goal"  class="goalCard" color="white" variant="outlined">
+      <v-card prepend-icon="mdi-flag" title="Create a goal"  class="dark-glass-card">
         <v-card-text>
             <v-form>
               <v-text-field label="Goal name"></v-text-field>
@@ -25,7 +25,7 @@
           <v-spacer></v-spacer>
           <v-btn text="Close" variant="plain" @click="createGoalCard = false"></v-btn>
 
-          <v-btn color="white" text="Save" variant="tonal" @click="createGoalCard = false"></v-btn>
+          <v-btn  text="Save" class="btn" @click="createGoalCard = false"></v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

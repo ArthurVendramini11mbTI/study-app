@@ -2,14 +2,15 @@
 import dashboardCalendar from '@/components/dashboard/dashboardCalendar.vue';
 import CreateGoal from '@/components/dashboard/dashboardGoals/createGoal.vue';
 import DashboardGoals from '@/components/dashboard/dashboardGoals/dashboardGoals.vue';
+import DashBoardHistoric from '@/components/dashboard/dashBoardHistoric.vue';
 import DashboardSideBar from '@/components/dashboard/dashboardSideBar.vue';
 import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
+import DashBoradStatus from '@/components/dashboard/dashBoradStatus.vue';
 
 </script>
 
 <template>
-    <v-row class=" pa-10 overflow-hidden" style="height: 100vh; background-color: #212121
-">
+    <v-row class=" pa-10 overflow-hidden dashboard-bg" style="height: 100vh;">
 
             <v-col cols="2">
                 <DashboardSideBar />    
@@ -18,9 +19,6 @@ import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
             <v-col cols="10" >
                 <v-row>
                     <DashboardUpperBar />
-                </v-row>
-
-                <v-row>
                 </v-row>
 
                 <v-row>
@@ -35,20 +33,14 @@ import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
                 </v-row>
 
                 <v-row>
+                    <DashBoradStatus/>
                 </v-row>
 
-                <v-row>
+
+                <v-row >
+                    <DashBoardHistoric/>
                 </v-row>
             </v-col>
     </v-row>
 </template>
 
-<style scope>
-    .backgroudDashboard{
-        background-image: url('@/assets/dashboardBackground.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-</style>
