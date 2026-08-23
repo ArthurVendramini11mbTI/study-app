@@ -7,7 +7,7 @@ import { number } from 'zod';
   const goalName = ref('')
   const goalDescription = ref('')
   const goalHours = ref<number | null>()
-  const goalsMinutes = ref<number | null>()
+  const goalMinutes = ref<number | null>()
 
   const form = ref()
 
@@ -31,7 +31,7 @@ import { number } from 'zod';
       },
 
       (value: string | number) => {
-        return Number(value) > 0 ? true : 'Hours cannot been negative' 
+        return Number(value) >= 0 ? true : 'Hours cannot been negative' 
       }
     ]
 
@@ -49,12 +49,22 @@ import { number } from 'zod';
       },
 
       (value: string | number) => {
-        return Number(value) < 60 && Number(value) > 0 ? true : 'Minutes must been between 1 and 60' 
+        return Number(value) < 60 && Number(value) >= 0 ? true : 'Minutes must been between 0 and 60' 
       }
     ]
 
+    const timeTogetherRule = () => {
+      const hours = Number(goalHours.value ?? 0)
+      const minutes = Number(goalMinutes.value ?? 0)
+
+      return hours > 0 || minutes > 0
+        ? true
+        : 'Hours and minutes cannot both be 0'
+    }
+
       async function createGoal() {
         const { valid } = await form.value.validate()
+
 
         if (!valid) {
             return
@@ -65,14 +75,14 @@ import { number } from 'zod';
         goalName.value = ''
         goalDescription.value = ''
         goalHours.value = null
-        goalsMinutes.value = null
+        goalMinutes.value = null
     }
 </script>
 
 <template>
   <div class="pa-4 text-center ">
     <v-dialog v-model="createGoalCard" max-width="500" >
-      <v-card prepend-icon="mdi-flag" title="Create a goal"  class="dark-glass-card rounded-xl">
+      <v-card prepend-icon="mdi-bullseye-arrow" title="Create a goal"  class="dark-glass-card rounded-xl">
         <v-card-text>
             <v-form ref="form" @submit.prevent="createGoal">
               <v-text-field label="Goal name" v-model="goalName" :rules="requiredRule"></v-text-field>
@@ -89,8 +99,8 @@ import { number } from 'zod';
                 </v-col>
 
                 <v-col cols="10" class="d-flex ga-2">
-                  <v-text-field label="Hours" :rules="hoursRules" v-model="goalHours"/>
-                  <v-text-field label="Minutes" v-model="goalsMinutes" :rules="minutesRules"/>
+                  <v-text-field label="Hours" :rules="[...hoursRules, timeTogetherRule]" v-model="goalHours"/>
+                  <v-text-field label="Minutes"  :rules="[...minutesRules,timeTogetherRule]" v-model="goalMinutes"/>
                 </v-col>
               </v-row>
 

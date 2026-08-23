@@ -15,9 +15,6 @@ const user = {
         permanent
         class="light-glass-card sidebar rounded-xl"
       >
-        <!-- Glow laranja animado -->
-        <div class="orange-aurora sidebar-aurora" />
-
         <!-- Conteúdo -->
         <v-list
           nav
@@ -70,7 +67,7 @@ const user = {
               >
                 <template #prepend>
                   <v-icon class="menu-icon">
-                    mdi-flag-outline
+                    mdi-bullseye-arrow
                   </v-icon>
                 </template>
               </v-list-item>
@@ -135,12 +132,6 @@ const user = {
 .sidebar-content {
   position: relative;
   z-index: 2;
-}
-
-.sidebar-aurora {
-  top: 15%;
-  left: -40%;
-  z-index: 0;
 }
 
 .logo {

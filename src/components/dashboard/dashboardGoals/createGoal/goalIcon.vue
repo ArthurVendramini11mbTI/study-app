@@ -34,11 +34,6 @@ function selectIcon(icon: string) {
 }
 
 function confirmSelection() {
-  console.log({
-    icon: selectedIcon.value,
-    color: selectedColor.value,
-  })
-
   selectIconCard.value = false
 }
 </script>
