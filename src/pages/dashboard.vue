@@ -27,7 +27,6 @@ import goalIcon from '@/components/dashboard/dashboardGoals/createGoal/goalIcon.
                         <DashboardGoals />
                         <CreateGoal/>
                         <goalIcon/>
-                        <GoalColorPicker/>
                     </v-col>
 
                     <v-col cols="6">

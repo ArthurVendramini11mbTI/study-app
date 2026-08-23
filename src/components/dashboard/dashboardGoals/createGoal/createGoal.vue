@@ -1,9 +1,72 @@
 <script setup lang="ts">
-  import { createGoalCard } from '@/composables/goal';
-  import { ref } from 'vue'
-  import { selectIconCard } from '@/composables/goal';
-  import {selectedIcon ,selectedColor} from '@/composables/goal'
+  import { ref } from 'vue';
 
+  import {selectedIcon ,selectedColor, selectIconCard, createGoalCard} from '@/composables/goal'
+import { number } from 'zod';
+
+  const goalName = ref('')
+  const goalDescription = ref('')
+  const goalHours = ref<number | null>()
+  const goalsMinutes = ref<number | null>()
+
+  const form = ref()
+
+    const requiredRule = [
+      (value: string) => {
+        return !!value || 'You must write something'
+      }
+    ]
+
+    const hoursRules = [
+      (value: string | number | null) => {
+        return value !== null && value !== ''
+          ? true
+          : 'You must write something'
+      },
+
+      (value: string | number) => {
+        return Number.isFinite(Number(value))
+          ? true
+          : 'This needs to be a number'
+      },
+
+      (value: string | number) => {
+        return Number(value) > 0 ? true : 'Hours cannot been negative' 
+      }
+    ]
+
+    const minutesRules = [
+      (value: string | number | null) => {
+        return value !== null && value !== ''
+          ? true
+          : 'You must write something'
+      },
+
+      (value: string | number) => {
+        return Number.isFinite(Number(value))
+          ? true
+          : 'This needs to be a number'
+      },
+
+      (value: string | number) => {
+        return Number(value) < 60 && Number(value) > 0 ? true : 'Minutes must been between 1 and 60' 
+      }
+    ]
+
+      async function createGoal() {
+        const { valid } = await form.value.validate()
+
+        if (!valid) {
+            return
+        }
+
+        createGoalCard.value = false
+
+        goalName.value = ''
+        goalDescription.value = ''
+        goalHours.value = null
+        goalsMinutes.value = null
+    }
 </script>
 
 <template>
@@ -11,9 +74,9 @@
     <v-dialog v-model="createGoalCard" max-width="500" >
       <v-card prepend-icon="mdi-flag" title="Create a goal"  class="dark-glass-card rounded-xl">
         <v-card-text>
-            <v-form>
-              <v-text-field label="Goal name"></v-text-field>
-              <v-text-field label="Goal description"></v-text-field>
+            <v-form ref="form" @submit.prevent="createGoal">
+              <v-text-field label="Goal name" v-model="goalName" :rules="requiredRule"></v-text-field>
+              <v-text-field label="Goal description" v-model="goalDescription" :rules="requiredRule"></v-text-field>
 
               <v-row>
                 <v-col cols="2">
@@ -26,22 +89,21 @@
                 </v-col>
 
                 <v-col cols="10" class="d-flex ga-2">
-                  <v-text-field label="Hours" />
-                  <v-text-field label="Minutes" />
+                  <v-text-field label="Hours" :rules="hoursRules" v-model="goalHours"/>
+                  <v-text-field label="Minutes" v-model="goalsMinutes" :rules="minutesRules"/>
                 </v-col>
               </v-row>
+
+              <v-divider></v-divider>
+
+              <v-card-actions class="mr-4">
+                <v-spacer></v-spacer>
+                <v-btn text="Close" variant="plain" @click="createGoalCard = false"></v-btn>
+
+                <v-btn  text="Save" class="btn" type="submit"></v-btn>
+              </v-card-actions>
             </v-form>
-
         </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-actions class="mr-4">
-          <v-spacer></v-spacer>
-          <v-btn text="Close" variant="plain" @click="createGoalCard = false"></v-btn>
-
-          <v-btn  text="Save" class="btn" @click="createGoalCard = false"></v-btn>
-        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>

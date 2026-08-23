@@ -34,38 +34,36 @@ body {
 .dashboard-bg {
   min-height: 100vh;
 
-  position: relative;
-
-  background:
-    radial-gradient(
-      circle at 10% 15%,
-      rgba(255, 210, 160, 0.45),
-      transparent 22%
-    ),
-
-    radial-gradient(
-      circle at 85% 20%,
-      rgba(255, 180, 90, 0.35),
-      transparent 25%
-    ),
-
-    radial-gradient(
-      circle at 75% 85%,
-      rgba(255, 120, 30, 0.40),
-      transparent 30%
-    ),
-
+  background-image:
     linear-gradient(
-      135deg,
-      #d93605 0%,
-      #f04a0a 35%,
-      #f97316 65%,
-      #fb8b24 100%
-    );
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.25)
+    ),
+    url('/src/assets/nitish-meena-RbbdzZBKRDY-unsplash.jpg');
 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
+}
 
-  overflow: hidden;
+
+
+
+.login-bg {
+  min-height: 100vh;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.25)
+    ),
+    url('/src/assets/michael-shtern--PvICnpWGlc-unsplash.jpg');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 
@@ -308,20 +306,4 @@ body {
    BOLHAS / AURORA
 ======================================== */
 
-
-    .dashboard-bg {
-  min-height: 100vh;
-
-  background-image:
-    linear-gradient(
-      rgba(0, 0, 0, 0.25),
-      rgba(0, 0, 0, 0.25)
-    ),
-    url('/src/assets/nitish-meena-RbbdzZBKRDY-unsplash.jpg');
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
 
