@@ -1,3 +1,8 @@
-  import { shallowRef } from 'vue'
+  import { ref } from 'vue'
 
-  export const createGoalCard = shallowRef(false)
+  export const createGoalCard = ref(false)
+
+  export const selectIconCard = ref(false)
+
+  export const selectedIcon = ref('mdi-book-outline')
+  export const selectedColor = ref('#f97316')

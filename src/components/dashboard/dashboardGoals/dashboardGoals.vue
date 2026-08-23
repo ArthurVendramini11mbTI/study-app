@@ -30,7 +30,9 @@
   <v-card class="mx-auto h-100 light-glass-card rounded-xl pa-2 ">
 
     <div class="d-flex justify-space-between align-center mb-2">
-            <p>Study Goals</p>
+            <v-card-title>
+              Study Goals
+            </v-card-title>
 
               <v-btn class="dark-glass-item rounded-lg btn" prepend-icon="mdi-plus" @click="createGoalCard = true">
                 New goal

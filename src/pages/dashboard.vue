@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import dashboardCalendar from '@/components/dashboard/dashboardCalendar.vue';
-import CreateGoal from '@/components/dashboard/dashboardGoals/createGoal.vue';
+import CreateGoal from '@/components/dashboard/dashboardGoals/createGoal/createGoal.vue';
 import DashboardGoals from '@/components/dashboard/dashboardGoals/dashboardGoals.vue';
 import DashBoardHistoric from '@/components/dashboard/dashBoardHistoric.vue';
 import DashboardSideBar from '@/components/dashboard/dashboardSideBar.vue';
 import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
 import DashBoradStatus from '@/components/dashboard/dashBoradStatus.vue';
+import goalIcon from '@/components/dashboard/dashboardGoals/createGoal/goalIcon.vue';
 
 </script>
 
@@ -25,6 +26,8 @@ import DashBoradStatus from '@/components/dashboard/dashBoradStatus.vue';
                     <v-col cols="6" >
                         <DashboardGoals />
                         <CreateGoal/>
+                        <goalIcon/>
+                        <GoalColorPicker/>
                     </v-col>
 
                     <v-col cols="6">
