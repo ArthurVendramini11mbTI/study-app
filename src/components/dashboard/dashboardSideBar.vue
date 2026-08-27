@@ -134,6 +134,7 @@ const user = {
   z-index: 2;
 }
 
+
 .logo {
   color: rgb(var(--v-theme-on-background));
   font-size: 1.4rem;

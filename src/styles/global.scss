@@ -72,7 +72,7 @@ body {
 ======================================== */
 
 .dark-glass-card {
-  background: rgba(48, 18, 5, 0.40) !important;
+  background: rgba(48, 18, 5, 0.40) ;
 
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
@@ -221,6 +221,7 @@ body {
 
 .item:hover .menu-icon {
   transform: scale(1.08);
+  color: #FFFFFF;
 }
 
 

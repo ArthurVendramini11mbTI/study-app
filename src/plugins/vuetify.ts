@@ -6,6 +6,8 @@
 
 // Composables
 import { createVuetify } from 'vuetify'
+
+import { VProgress } from 'vuetify/labs/VProgress'
 // Styles
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
@@ -40,4 +42,8 @@ export default createVuetify({
       },
     },
   },
+
+  components:{
+    VProgress
+  }
 })

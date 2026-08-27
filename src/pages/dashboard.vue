@@ -34,8 +34,8 @@ import goalIcon from '@/components/dashboard/dashboardGoals/createGoal/goalIcon.
                     </v-col>
                 </v-row>
 
-                <v-row>
-                    <DashBoradStatus/>
+                <v-row >
+                    <DashBoradStatus />
                 </v-row>
 
 
