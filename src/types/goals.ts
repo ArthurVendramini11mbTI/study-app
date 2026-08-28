@@ -7,7 +7,6 @@ export const GoalsSchema = z.array(
     title: z.string(),
     icon: z.string(),
     color: z.string(),
-
     progress: z
       .number()
       .min(0)
@@ -46,3 +45,23 @@ export const GoalsSchema = z.array(
 })
 
 export type Goals = z.infer<typeof GoalsSchema>
+
+const timeSchema = z.object({
+  hours: z.number().int().nonnegative(),
+  minutes: z.number().int().min(0).max(59),
+});
+
+export const studySchema = z.array(z.object({
+    title: z.string().min(1),
+    description: z.string().min(1),
+    icon: z.string().min(1),
+    color: z.string().min(1),
+    progress: z.number().int().min(0).max(100),
+    StudyingTime: timeSchema,
+    when: z.object({
+    day: z.string().min(1),
+    time: timeSchema,
+  }),
+}));
+
+export type Study = z.infer<typeof studySchema>;

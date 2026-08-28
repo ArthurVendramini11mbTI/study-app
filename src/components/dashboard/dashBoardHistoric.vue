@@ -1,7 +1,7 @@
 <script setup lang="ts">
-    import { GoalsSchema } from '@/types/goals';
+    import { studySchema } from '@/types/goals';
     
-        const recentGoals = GoalsSchema.parse([
+        const recentGoals = studySchema.parse([
             {
             title: 'Estudar Node',
             description: 'Express',
@@ -13,18 +13,37 @@
                 minutes: 40
             },
             when:{
-                day: 'today',
+                day: 'Today',
                 time: {
                     hours: 9,
                     minutes: 10
                 }
             }
+            },
+                        {
+            title: 'Estudar PHP',
+            description: 'Laravel',
+            icon: 'mdi-language-typescript',
+            color: 'red',
+            progress: 50,
+            StudyingTime: {
+                hours: 2,
+                minutes: 40
+            },
+            when:{
+                day: 'Today',
+                time: {
+                    hours: 9,
+                    minutes: 10
+                }
             }
+            },
+            
         ])
 </script>
 
 <template>
-    <v-card text="" title="" class="w-100 light-glass-card rounded-xl pa-2">
+    <v-card text="" title="" class="w-100 light-glass-card rounded-xl pa-2 pb-8">
         <template v-slot:title>Recent Study Sessions</template>
 
         <template v-slot:append>
@@ -37,28 +56,30 @@
         </template>
 
         <div class="d-flex flex-column ga-2">
-            <v-card  class="mx-auto w-100  inner-card card rounded-lg d-flex justify-space-between align-center pr-5 pl-5"   v-for="goal in recentGoals">
+            <v-card  class="mx-auto w-100  inner-card card rounded-lg d-flex justify-space-between align-center pa-2 pr-6 pl-6"   v-for="goal in recentGoals">
+            <div class="d-flex align-center ga-10">
+                <div>
+                    <v-icon :icon="goal.icon" :color="goal.color" size="35"></v-icon>
+                </div>
+
+                <div class="d-flex flex-column">
+                    <span class="text-title-large">{{goal.title}}</span>
+                    <span>{{ goal.description }}</span>   
+                </div>
+            </div>
+
             <div>
-                <v-icon :icon="goal.icon" :color="goal.color"></v-icon>
+                <p>{{ goal.StudyingTime.hours }}h {{ goal.StudyingTime.minutes }}m</p>
             </div>
 
-            <div class="d-flex flex-column justify-center ps-5"  style="width: 60%">
-                <p class="ma-1">{{goal.title}}</p>
+            <div class="d-flex align-center ga-15">
+                <div>
+                    <p>{{ goal.when.day }}; {{ goal.when.time.hours }}:{{ goal.when.time.minutes }} AM</p>
+                </div>
 
-                <v-progress-linear
-                :model-value="goal.progress"
-                height="8"
-                rounded
-                :color="goal.color"
-                style="width: 95%"
-                />
-            </div>
-
-            <div class="d-flex align-center ga-2" style="width: 30%;">
-                <p>{{ goal.progress }}%</p>
-                <v-chip :color="goal.status.color" class="w-100 d-flex justify-center">
-                {{ goal.status.text }}
-                </v-chip>
+                <v-btn class="btn ">
+                    <v-icon icon="mdi-play"></v-icon>
+                </v-btn>
             </div>
             </v-card>
         </div>
