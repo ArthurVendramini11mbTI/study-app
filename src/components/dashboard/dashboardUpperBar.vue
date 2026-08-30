@@ -30,7 +30,7 @@ import { ref } from 'vue';
             :width="300"
             :model-value="values" />
             
-            <v-chip text="+12%" append-icon="mdi-chart-line-variant" class="pa-5 d-flex justify-center"></v-chip>
+            <v-chip text="+12%" append-icon="mdi-chart-line-variant" class="pa-5 d-flex justify-center rounded-lg"></v-chip>
         </div>
     </v-card>
 </template>
