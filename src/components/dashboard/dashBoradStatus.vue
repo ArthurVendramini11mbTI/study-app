@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { ref } from 'vue'
 
     const categories = {
         time: {
@@ -33,7 +34,7 @@ import { computed } from 'vue';
         return (categories.goals.completedGoals / categories.goals.totalGoals) * 100
     })
 
-      import { ref } from 'vue'
+
 
   const values = ref([0, 2, 2, 3, 6, 3, 2])
 </script>
@@ -102,9 +103,9 @@ import { computed } from 'vue';
                 <v-sparkline
                     :model-value="values"
                     color="blue"
-                    :line-width="2"
-                    :height="44"
-                    :width="88"
+                    :line-width="1"
+                    :height="30"
+                    :width="50"
                     interactive
                     tooltip
                 />

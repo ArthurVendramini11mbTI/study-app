@@ -8,6 +8,7 @@
 import { createVuetify } from 'vuetify'
 
 import { VProgress } from 'vuetify/labs/VProgress'
+import { VSparkline } from 'vuetify/components/VSparkline'
 // Styles
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
