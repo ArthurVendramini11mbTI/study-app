@@ -38,38 +38,32 @@ import { computed } from 'vue';
   const values = ref([0, 2, 2, 3, 6, 3, 2])
 </script>
 
-<template >
-    <v-col cols="3">
-        <v-card class="light-glass-card rounded-xl d-flex pa-4 justify-space-around align-center">
+<template>
+    <v-col cols="3" class="pa-2">
+        <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
+            <v-icon icon="mdi-clock-time-eight-outline" size="40" />
 
-            <div class="dark-glass-card rounded-lg pa-2 purple-card" style="height: fit-content; width: fit-content;">
-                    <v-icon icon="mdi-clock-time-eight-outline" size="45" ></v-icon>
-            </div>
-
-            <div class="d-flex flex-column ga-2">
-                <span>Study Time Today</span>
-                <span class="text-display-small">{{ categories.time.studied.hours }}h {{ categories.time.studied.minutes }}m</span>
-                <span>Goal: {{ categories.time.goal.hours }}h {{ categories.time.goal.minutes }}m</span>
+            <div class="d-flex flex-column ga-1">
+                <span class="text-body-2">Study Time Today</span>
+                <span class="text-h6 font-weight-bold">{{ categories.time.studied.hours }}h {{ categories.time.studied.minutes }}m</span>
+                <span class="text-body-2 text-medium-emphasis">Goal: {{ categories.time.goal.hours }}h {{ categories.time.goal.minutes }}m</span>
             </div>
 
             <div>
-                <v-progress-circular :size="75" :width="8"  :model-value="studyTimeProgress" color="rgba(124, 58, 237, 0.28)">
-                     <v-avatar color="transparent" size="70"><span style="color: white;">{{ studyTimeProgress }} %</span></v-avatar>
+                <v-progress-circular :size="64" :width="7" :model-value="studyTimeProgress">
+                     <span class="text-caption">{{ studyTimeProgress }}%</span>
                 </v-progress-circular>
             </div>
         </v-card>
     </v-col>
-    <v-col cols="3">
-        <v-card class="light-glass-card rounded-xl d-flex pa-4 justify-space-around align-center">
+    <v-col cols="3" class="pa-2">
+        <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
+            <v-icon icon="mdi-fire" size="40" />
 
-            <div class="dark-glass-card rounded-lg pa-2 orange-card" style="height: fit-content; width: fit-content;">
-                    <v-icon icon="mdi-fire" size="45"  ></v-icon>
-            </div>
-
-            <div class="d-flex flex-column ga-2">
-                <span>Streak</span>
-                <span class="text-display-small">{{ categories.streak.actualStreak}} days</span>
-                <span>Best: {{ categories.streak.bestStreak }} days</span>
+            <div class="d-flex flex-column ga-1">
+                <span class="text-body-2">Streak</span>
+                <span class="text-h6 font-weight-bold">{{ categories.streak.actualStreak}} days</span>
+                <span class="text-body-2 text-medium-emphasis">Best: {{ categories.streak.bestStreak }} days</span>
             </div>
 
             <div>
@@ -77,46 +71,40 @@ import { computed } from 'vue';
             </div>
         </v-card>
     </v-col>
-    <v-col cols="3">
-        <v-card class="light-glass-card rounded-xl d-flex pa-4 justify-space-around align-center">
+    <v-col cols="3" class="pa-2">
+        <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
+            <v-icon icon="mdi-check-circle-outline" size="40" />
 
-            <div class="dark-glass-card rounded-lg pa-2 green-card" style="height: fit-content; width: fit-content;">
-                    <v-icon icon="mdi-check-circle-outline" size="45" ></v-icon>
-            </div>
-
-            <div class="d-flex flex-column ga-2">
-                <span>Completed Goals</span>
-                <span class="text-display-small">{{ categories.goals.completedGoals }} / {{ categories.goals.totalGoals }}</span>
-                <span>This month</span>
+            <div class="d-flex flex-column ga-1">
+                <span class="text-body-2">Completed Goals</span>
+                <span class="text-h6 font-weight-bold">{{ categories.goals.completedGoals }} / {{ categories.goals.totalGoals }}</span>
+                <span class="text-body-2 text-medium-emphasis">This month</span>
             </div>
 
             <div>
-                <v-progress-circular :size="75" :width="8"  :model-value="goalsProgress" color="rgba(34, 197, 94, 0.26)">
-                     <v-avatar color="transparent" size="70"><span style="color: white;">{{ goalsProgress }} %</span></v-avatar>
+                <v-progress-circular :size="64" :width="7" :model-value="goalsProgress" >
+                     <span class="text-caption">{{ goalsProgress }}%</span>
                 </v-progress-circular>
             </div>
         </v-card>
     </v-col>
-    <v-col cols="3">
-        <v-card class="light-glass-card rounded-xl d-flex pa-4 justify-space-around align-center">
+    <v-col cols="3" class="pa-2">
+        <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
+            <v-icon icon="mdi-content-paste" size="40" />
 
-            <div class="dark-glass-card rounded-lg pa-2 blue-card" style="height: fit-content; width: fit-content;">
-                    <v-icon icon="mdi-content-paste" size="45"></v-icon>
+            <div class="d-flex flex-column ga-1">
+                <span class="text-body-2">Taks Due</span>
+                <span class="text-h6 font-weight-bold">{{ categories.tasks.tasksDue }}</span>
+                <span class="text-body-2 text-medium-emphasis">Next 7 days</span>
             </div>
 
-            <div class="d-flex flex-column ga-2">
-                <span>Taks Due</span>
-                <span class="text-display-small">{{ categories.tasks.tasksDue }}</span>
-                <span>Next 7 days</span>
-            </div>
-
-            <div class="sparkline-container">
+            <div class="d-flex align-center">
                 <v-sparkline
                     :model-value="values"
                     color="blue"
                     :line-width="2"
-                    :height="60"
-                    :width="120"
+                    :height="44"
+                    :width="88"
                     interactive
                     tooltip
                 />
@@ -125,26 +113,3 @@ import { computed } from 'vue';
     </v-col>
 
 </template>
-
-<style scoped>
-.sparkline-container {
-  width: 100px;
-  height: 60px;
-}
-
-.purple-card {
-  background: rgba(124, 58, 237, 0.28) !important;
-}
-
-.blue-card {
-  background: rgba(37, 99, 235, 0.28) !important;
-}
-
-.green-card {
-  background: rgba(34, 197, 94, 0.26) !important;
-}
-
-.orange-card {
-  background: rgba(249, 115, 22, 0.28) !important;
-}
-</style>

@@ -19,25 +19,7 @@
                     minutes: 10
                 }
             }
-            },
-                        {
-            title: 'Estudar PHP',
-            description: 'Laravel',
-            icon: 'mdi-language-typescript',
-            color: 'red',
-            progress: 50,
-            StudyingTime: {
-                hours: 2,
-                minutes: 40
-            },
-            when:{
-                day: 'Today',
-                time: {
-                    hours: 9,
-                    minutes: 10
-                }
             }
-            },
             
         ])
 </script>
@@ -56,28 +38,28 @@
         </template>
 
         <div class="d-flex flex-column ga-2">
-            <v-card  class="mx-auto w-100  inner-card card rounded-lg d-flex justify-space-between align-center pa-2 pr-6 pl-6"   v-for="goal in recentGoals">
+            <v-card height="48" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5 py-1" v-for="goal in recentGoals">
             <div class="d-flex align-center ga-10">
                 <div>
-                    <v-icon :icon="goal.icon" :color="goal.color" size="35"></v-icon>
+                    <v-icon :icon="goal.icon" :color="goal.color" size="28"></v-icon>
                 </div>
 
                 <div class="d-flex flex-column">
-                    <span class="text-title-large">{{goal.title}}</span>
-                    <span>{{ goal.description }}</span>   
+                    <span class="text-body-1">{{goal.title}}</span>
+                    <span class="text-caption">{{ goal.description }}</span>
                 </div>
             </div>
 
             <div>
-                <p>{{ goal.StudyingTime.hours }}h {{ goal.StudyingTime.minutes }}m</p>
+                <p class="ma-0">{{ goal.StudyingTime.hours }}h {{ goal.StudyingTime.minutes }}m</p>
             </div>
 
             <div class="d-flex align-center ga-15">
                 <div>
-                    <p>{{ goal.when.day }}; {{ goal.when.time.hours }}:{{ goal.when.time.minutes }} AM</p>
+                    <p class="ma-0">{{ goal.when.day }}; {{ goal.when.time.hours }}:{{ goal.when.time.minutes }} AM</p>
                 </div>
 
-                <v-btn class="btn ">
+                <v-btn class="btn">
                     <v-icon icon="mdi-play"></v-icon>
                 </v-btn>
             </div>

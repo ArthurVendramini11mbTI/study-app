@@ -40,7 +40,7 @@
     </div>
 
     <div class="d-flex flex-column overflow-y-hidden ga-2 w-100">
-      <v-card  class="mx-auto w-100  inner-card card rounded-lg d-flex justify-space-between align-center pr-5 pl-5" v-for="goal in goals">
+      <v-card height="48" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5" v-for="goal in goals">
         <div>
           <v-icon :icon="goal.icon" :color="goal.color"></v-icon>
         </div>
@@ -68,5 +68,4 @@
 
   </v-card>
 </template>
-
 
