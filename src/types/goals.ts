@@ -38,7 +38,7 @@ export const GoalsSchema = z.array(
       ...goal,
       status: {
         text: 'Almost done',
-        color: 'purple',
+        color: 'success',
       },
     }
   })

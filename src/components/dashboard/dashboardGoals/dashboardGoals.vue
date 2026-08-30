@@ -1,6 +1,7 @@
 <script setup lang="ts"> 
   import { createGoalCard } from '@/composables/goal';
   import { GoalsSchema } from '@/types/goals';
+import Color from 'vuetify/directives/color';
 
   const goals = GoalsSchema.parse([
     {
@@ -23,6 +24,13 @@
       color: 'yellow',
       progress: 5,
     },
+
+        {
+      title: 'Estudar Adonis',
+      icon: '$eyeDropper',
+      color: 'yellow',
+      progress: 5,
+    },
   ])
 </script>
 
@@ -40,7 +48,7 @@
     </div>
 
     <div class="d-flex flex-column overflow-y-hidden ga-2 w-100">
-      <v-card height="56" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5" v-for="goal in goals">
+      <v-card height="56" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5" v-for="goal in goals.slice(0, 4)">
         <div>
           <v-icon :icon="goal.icon" :color="goal.color"></v-icon>
         </div>
@@ -58,9 +66,9 @@
         </div>
 
         <div class="d-flex align-center ga-2" style="width: 30%;">
-          <p>{{ goal.progress }}%</p>
-          <v-chip :color="goal.status.color" class="w-100 d-flex justify-center">
-            {{ goal.status.text }}
+          <p style="min-width: 35px;">{{ goal.progress }}%</p>
+          <v-chip :color="goal.status.color" class="w-100 d-flex justify-center dark-glass-card">
+            <span>{{ goal.status.text }}</span>
           </v-chip>
         </div>
       </v-card>
