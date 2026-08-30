@@ -11,10 +11,12 @@ import goalIcon from '@/components/dashboard/dashboardGoals/createGoal/goalIcon.
 </script>
 
 <template>
-    <v-row class=" pa-10 overflow-hidden dashboard-bg" style="height: 100vh;">
+    <v-row class="pa-10 dashboard-bg" style="min-height: 100vh;">
 
             <v-col cols="2">
-                <DashboardSideBar />    
+                <div class="sidebar-sticky">
+                    <DashboardSideBar />
+                </div>
             </v-col>
 
             <v-col cols="10" >
@@ -46,3 +48,10 @@ import goalIcon from '@/components/dashboard/dashboardGoals/createGoal/goalIcon.
     </v-row>
 </template>
 
+<style scoped>
+.sidebar-sticky {
+  position: sticky;
+  top: 40px;
+  height: calc(100vh - 80px);
+}
+</style>

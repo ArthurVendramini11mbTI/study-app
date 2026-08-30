@@ -19,7 +19,62 @@
                     minutes: 10
                 }
             }
+        },
+                    {
+            title: 'Estudar Node',
+            description: 'Express',
+            icon: '$vuetify',
+            color: 'blue',
+            progress: 50,
+            StudyingTime: {
+                hours: 2,
+                minutes: 40
+            },
+            when:{
+                day: 'Today',
+                time: {
+                    hours: 9,
+                    minutes: 10
+                }
             }
+        },
+                            {
+            title: 'Estudar Node',
+            description: 'Express',
+            icon: '$vuetify',
+            color: 'blue',
+            progress: 50,
+            StudyingTime: {
+                hours: 2,
+                minutes: 40
+            },
+            when:{
+                day: 'Today',
+                time: {
+                    hours: 9,
+                    minutes: 10
+                }
+            }
+        },
+                            {
+            title: 'Estudar Node',
+            description: 'Express',
+            icon: '$vuetify',
+            color: 'blue',
+            progress: 50,
+            StudyingTime: {
+                hours: 2,
+                minutes: 40
+            },
+            when:{
+                day: 'Today',
+                time: {
+                    hours: 9,
+                    minutes: 10
+                }
+            }
+        },
+            
             
         ])
 </script>
@@ -38,7 +93,7 @@
         </template>
 
         <div class="d-flex flex-column ga-2">
-            <v-card height="48" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5 py-1" v-for="goal in recentGoals">
+            <v-card height="56" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5 py-1" v-for="goal in recentGoals">
             <div class="d-flex align-center ga-10">
                 <div>
                     <v-icon :icon="goal.icon" :color="goal.color" size="28"></v-icon>

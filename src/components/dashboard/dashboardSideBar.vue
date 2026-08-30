@@ -127,6 +127,7 @@ const user = {
 .sidebar {
   position: relative;
   overflow: hidden;
+  height: 100% !important;
 }
 
 .sidebar-content {
