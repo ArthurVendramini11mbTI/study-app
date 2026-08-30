@@ -7,6 +7,7 @@ import DashboardSideBar from '@/components/dashboard/dashboardSideBar.vue';
 import DashboardUpperBar from '@/components/dashboard/dashboardUpperBar.vue';
 import DashBoradStatus from '@/components/dashboard/dashBoradStatus.vue';
 import goalIcon from '@/components/dashboard/dashboardGoals/createGoal/goalIcon.vue';
+import DashboardWelcome from '@/components/dashboard/dashboardWelcome.vue';
 
 </script>
 
@@ -20,6 +21,10 @@ import goalIcon from '@/components/dashboard/dashboardGoals/createGoal/goalIcon.
             </v-col>
 
             <v-col cols="10" >
+                <v-row>
+                    <DashboardWelcome/>
+                </v-row>
+
                 <v-row>
                     <DashboardUpperBar />
                 </v-row>
