@@ -15,27 +15,27 @@ import 'vuetify/styles'
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   theme: {
-    defaultTheme: 'axisOrange',
+    defaultTheme: 'axisBlue',
 
     themes: {
-      axisOrange: {
+      axisBlue: {
         dark: true,
 
         colors: {
-          background: '#d93605',
-          surface: '#7c2508',
+          background: '#0b1f3a',
+          surface: '#12345b',
 
-          primary: '#f97316',
-          secondary: '#fb923c',
-          accent: '#fbbf24',
+          primary: '#3b82f6',
+          secondary: '#60a5fa',
+          accent: '#38bdf8',
 
-          'on-background': '#fff7ed',
-          'on-surface': '#fff7ed',
+          'on-background': '#eff6ff',
+          'on-surface': '#eff6ff',
 
-          muted: '#ffd4b5',
+          muted: '#bfdbfe',
 
           success: '#22c55e',
-          warning: '#fbbf24',
+          warning: '#facc15',
           error: '#ef4444',
           info: '#38bdf8',
         },
