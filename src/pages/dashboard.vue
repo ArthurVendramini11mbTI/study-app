@@ -12,7 +12,8 @@ import DashboardWelcome from '@/components/dashboard/dashboardWelcome.vue';
 </script>
 
 <template>
-    <v-row class="pa-10 dashboard-bg" style="min-height: 100vh;">
+    <v-main class="dashboard-page">
+    <v-row class="pa-10 dashboard-bg " style="min-height: 100vh;">
 
             <v-col cols="2">
                 <div class="sidebar-sticky">
@@ -51,6 +52,7 @@ import DashboardWelcome from '@/components/dashboard/dashboardWelcome.vue';
                 </v-row>
             </v-col>
     </v-row>
+    </v-main>
 </template>
 
 <style scoped>
@@ -58,5 +60,17 @@ import DashboardWelcome from '@/components/dashboard/dashboardWelcome.vue';
   position: sticky;
   top: 40px;
   height: calc(100vh - 80px);
+}
+
+.dashboard-page {
+  height: 100vh;
+  overflow-y: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.dashboard-page::-webkit-scrollbar {
+  display: none;
 }
 </style>
