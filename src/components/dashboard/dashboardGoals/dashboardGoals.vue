@@ -1,5 +1,6 @@
 <script setup lang="ts"> 
   import { createGoalCard } from '@/composables/goal';
+  import { getIconColor } from '@/composables/iconColor';
   import { GoalsSchema } from '@/types/goals';
   import { Icon } from '@iconify/vue'
 
@@ -14,7 +15,7 @@
     {
       title: 'Estudar MySQL',
       icon: 'tabler:database',
-      color: 'error',
+      color: '#79A3E7',
       progress: 95,
     },
 
@@ -22,13 +23,13 @@
       title: 'Estudar Adonis',
       icon: 'tabler:star',
       color: 'warning',
-      progress: 5,
+      progress: 67,
     },
 
         {
       title: 'Estudar Adonis',
       icon: 'tabler:star',
-      color: 'warning',
+      color: 'primary',
       progress: 5,
     },
   ])
@@ -53,7 +54,7 @@
 
         <div class="d-flex ga-4 w-75 align-center" >
           <div>
-            <Icon :icon="goal.icon" :style="{ color: `rgb(var(--v-theme-${goal.color}))` }" width="24" height="24" />
+          <Icon :icon="goal.icon" :style="{ color: getIconColor(goal.color) }" width="24" height="24" />
           </div>
 
           <div class="d-flex flex-column w-100">

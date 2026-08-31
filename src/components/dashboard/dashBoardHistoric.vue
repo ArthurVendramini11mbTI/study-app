@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import { studySchema } from '@/types/goals';
+    import { getIconColor } from '@/composables/iconColor';
     import { Icon } from '@iconify/vue'
     
         const recentGoals = studySchema.parse([
@@ -97,7 +98,7 @@
             <v-card height="56" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5 py-1" v-for="goal in recentGoals">
             <div class="d-flex align-center ga-10">
                 <div>
-                    <Icon :icon="goal.icon" :style="{ color: `rgb(var(--v-theme-${goal.color}))` }" width="28" height="28" />
+                    <Icon :icon="goal.icon" :style="{ color: getIconColor(goal.color) }" width="28" height="28" />
                 </div>
 
                 <div class="d-flex flex-column">
