@@ -6,7 +6,7 @@ import { Icon } from '@iconify/vue'
 <template>
     <div  class="w-100 d-flex justify-space-between align-center">
         <div class="d-flex flex-column">
-            <span class="text-display-small">Hello, Arthur</span>
+            <span class="text-display-small">Hello, Arthur 👋</span>
 
             <span class="font-weight-thin">Ready to make this day productive? You've got this</span>
         </div>

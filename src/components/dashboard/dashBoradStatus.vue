@@ -42,7 +42,7 @@ import { Icon } from '@iconify/vue'
 
 <template>
     <v-col cols="3" class="pa-2">
-        <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
+        <v-card class="light-glass-card h-100 rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
             <Icon icon="tabler:clock-hour-8" width="50" height="50" />
 
             <div class="d-flex flex-column ga-1">
@@ -59,7 +59,7 @@ import { Icon } from '@iconify/vue'
         </v-card>
     </v-col>
     <v-col cols="3" class="pa-2">
-        <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
+        <v-card class="light-glass-card h-100 rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
             <Icon icon="tabler:flame" width="50" height="50" />
 
             <div class="d-flex flex-column ga-1">
@@ -74,7 +74,7 @@ import { Icon } from '@iconify/vue'
         </v-card>
     </v-col>
     <v-col cols="3" class="pa-2">
-        <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
+        <v-card class="light-glass-card h-100 rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
             <Icon icon="tabler:circle-check" width="50" height="50" />
 
             <div class="d-flex flex-column ga-1">
@@ -91,7 +91,7 @@ import { Icon } from '@iconify/vue'
         </v-card>
     </v-col>
     <v-col cols="3" class="pa-2">
-        <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
+        <v-card class="light-glass-card h-100 rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
             <Icon icon="tabler:clipboard" width="50" height="50" />
 
             <div class="d-flex flex-column ga-1">

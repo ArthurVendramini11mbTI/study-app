@@ -1,8 +1,35 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { Icon } from '@iconify/vue'
 
 const value = ref([new Date()])
+
+const calendar = ref()
+
+const currentMonth = computed(() => {
+  const date = value.value[0]
+
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    year: 'numeric'
+  })
+})
+
+function previousMonth() {
+  const date = new Date(value.value[0])
+
+  date.setMonth(date.getMonth() - 1)
+
+  value.value = [date]
+}
+
+function nextMonth() {
+  const date = new Date(value.value[0])
+
+  date.setMonth(date.getMonth() + 1)
+
+  value.value = [date]
+}
 </script>
 
 <template>
@@ -10,20 +37,20 @@ const value = ref([new Date()])
 
     <div class="d-flex align-center justify-space-between mb-2">
 
-      <span class="text-subtitle-1 font-weight-medium">May 2025</span>
+      <span class="text-subtitle-1 font-weight-medium">{{ currentMonth }}</span>
 
       <div class="d-flex ga-4">
-        <v-btn variant="text" size="small" class="btn rounded-lg">
+        <v-btn variant="text" size="small" class="btn rounded-lg" @click="previousMonth">
           <Icon icon="tabler:chevron-left" width="20" height="20" />
         </v-btn>
-        <v-btn variant="text" size="small" class="btn rounded-lg">
+        <v-btn variant="text" size="small" class="btn rounded-lg" @click="nextMonth">
           <Icon icon="tabler:chevron-right" width="20" height="20" />
         </v-btn>
       </div>
 
     </div>
 
-    <v-calendar :v-model="value" type="month" class="bg-transparent" style="height: 280px; flex: 0 0 280px"hide-header/>
+    <v-calendar :v-model="value" ref="calendar" type="month" class="bg-transparent" style="height: 280px; flex: 0 0 280px"hide-header/>
 
     <div class="d-flex align-center justify-space-between mt-2">
       <div class="d-flex align-center ga-2">
