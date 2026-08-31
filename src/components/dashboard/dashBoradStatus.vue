@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { ref } from 'vue'
+import { Icon } from '@iconify/vue'
 
     const categories = {
         time: {
@@ -42,7 +43,7 @@ import { ref } from 'vue'
 <template>
     <v-col cols="3" class="pa-2">
         <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
-            <v-icon icon="mdi-clock-time-eight-outline" size="40" />
+            <Icon icon="tabler:clock-hour-8" width="40" height="40" />
 
             <div class="d-flex flex-column ga-1">
                 <span class="text-body-2">Study Time Today</span>
@@ -59,7 +60,7 @@ import { ref } from 'vue'
     </v-col>
     <v-col cols="3" class="pa-2">
         <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
-            <v-icon icon="mdi-fire" size="40" />
+            <Icon icon="tabler:flame" width="40" height="40" />
 
             <div class="d-flex flex-column ga-1">
                 <span class="text-body-2">Streak</span>
@@ -74,7 +75,7 @@ import { ref } from 'vue'
     </v-col>
     <v-col cols="3" class="pa-2">
         <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
-            <v-icon icon="mdi-check-circle-outline" size="40" />
+            <Icon icon="tabler:circle-check" width="40" height="40" />
 
             <div class="d-flex flex-column ga-1">
                 <span class="text-body-2">Completed Goals</span>
@@ -91,7 +92,7 @@ import { ref } from 'vue'
     </v-col>
     <v-col cols="3" class="pa-2">
         <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
-            <v-icon icon="mdi-content-paste" size="40" />
+            <Icon icon="tabler:clipboard" width="40" height="40" />
 
             <div class="d-flex flex-column ga-1">
                 <span class="text-body-2">Taks Due</span>

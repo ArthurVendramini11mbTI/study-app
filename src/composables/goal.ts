@@ -4,5 +4,5 @@
 
   export const selectIconCard = ref(false)
 
-  export const selectedIcon = ref('mdi-book-outline')
+  export const selectedIcon = ref('tabler:book')
   export const selectedColor = ref('#3b82f6')

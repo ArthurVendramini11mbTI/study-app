@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { ref } from 'vue';
+  import { Icon } from '@iconify/vue'
 
   import {selectedIcon ,selectedColor, selectIconCard, createGoalCard} from '@/composables/goal'
 import { number } from 'zod';
@@ -82,7 +83,8 @@ import { number } from 'zod';
 <template>
   <div class="pa-4 text-center ">
     <v-dialog v-model="createGoalCard" max-width="500" >
-      <v-card prepend-icon="mdi-bullseye-arrow" title="Create a goal"  class="dark-glass-card rounded-xl">
+      <v-card title="Create a goal"  class="dark-glass-card rounded-xl">
+        <template #prepend><Icon icon="tabler:target-arrow" width="24" height="24" /></template>
         <v-card-text>
             <v-form ref="form" @submit.prevent="createGoal">
               <v-text-field label="Goal name" v-model="goalName" :rules="requiredRule"></v-text-field>
@@ -92,7 +94,7 @@ import { number } from 'zod';
                 <v-col cols="2">
                   <v-btn class="icon-selector w-100" variant="flat" height="56" @click="selectIconCard = true">
                     <div class="d-flex flex-column align-center justify-center ga-1">
-                      <v-icon size="28" :color="selectedColor">{{ selectedIcon }}</v-icon>
+                      <Icon :icon="selectedIcon" :style="{ color: selectedColor }" width="28" height="28" />
                       <span class="text-caption">Icon</span>
                     </div>
                   </v-btn>

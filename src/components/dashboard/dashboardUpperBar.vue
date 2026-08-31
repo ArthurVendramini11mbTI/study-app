@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { Icon } from '@iconify/vue'
 
   const values = ref([0, 2, 7, 3, 6, 3, 2])
 </script>
@@ -7,7 +8,7 @@ import { ref } from 'vue';
 <template>
     <v-card class="w-100 light-glass-card rounded-xl pa-5 d-flex align-center justify-space-between">
         <div class="d-flex align-center ga-4">
-            <v-icon icon="mdi-hexagram-outline" size="70"></v-icon>
+            <Icon icon="tabler:sparkle-highlight" width="70" height="70" />
 
             <div class="d-flex flex-column ga-2 justify-center">
                 <span class="text-title-large">Keep going!</span>
@@ -30,7 +31,9 @@ import { ref } from 'vue';
             :width="300"
             :model-value="values" />
             
-            <v-chip text="+12%" append-icon="mdi-chart-line-variant" class="pa-5 d-flex justify-center rounded-lg"></v-chip>
+            <v-chip text="+12%" class="pa-5 d-flex justify-center rounded-lg">
+              <template #append><Icon icon="tabler:chart-line" width="18" height="18" /></template>
+            </v-chip>
         </div>
     </v-card>
 </template>

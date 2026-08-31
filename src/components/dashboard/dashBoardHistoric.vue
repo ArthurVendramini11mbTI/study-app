@@ -1,12 +1,13 @@
 <script setup lang="ts">
     import { studySchema } from '@/types/goals';
+    import { Icon } from '@iconify/vue'
     
         const recentGoals = studySchema.parse([
             {
             title: 'Estudar Node',
             description: 'Express',
-            icon: '$vuetify',
-            color: 'blue',
+            icon: 'tabler:book',
+            color: 'primary',
             progress: 50,
             StudyingTime: {
                 hours: 2,
@@ -23,8 +24,8 @@
                     {
             title: 'Estudar Node',
             description: 'Express',
-            icon: '$vuetify',
-            color: 'blue',
+            icon: 'tabler:book',
+            color: 'primary',
             progress: 50,
             StudyingTime: {
                 hours: 2,
@@ -41,8 +42,8 @@
                             {
             title: 'Estudar Node',
             description: 'Express',
-            icon: '$vuetify',
-            color: 'blue',
+            icon: 'tabler:book',
+            color: 'primary',
             progress: 50,
             StudyingTime: {
                 hours: 2,
@@ -59,8 +60,8 @@
                             {
             title: 'Estudar Node',
             description: 'Express',
-            icon: '$vuetify',
-            color: 'blue',
+            icon: 'tabler:book',
+            color: 'primary',
             progress: 50,
             StudyingTime: {
                 hours: 2,
@@ -96,7 +97,7 @@
             <v-card height="56" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5 py-1" v-for="goal in recentGoals">
             <div class="d-flex align-center ga-10">
                 <div>
-                    <v-icon :icon="goal.icon" :color="goal.color" size="28"></v-icon>
+                    <Icon :icon="goal.icon" :style="{ color: `rgb(var(--v-theme-${goal.color}))` }" width="28" height="28" />
                 </div>
 
                 <div class="d-flex flex-column">
@@ -115,7 +116,7 @@
                 </div>
 
                 <v-btn class="btn">
-                    <v-icon icon="mdi-play"></v-icon>
+                    <Icon icon="tabler:player-play" width="20" height="20" />
                 </v-btn>
             </div>
             </v-card>

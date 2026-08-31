@@ -1,34 +1,34 @@
 <script setup lang="ts"> 
   import { createGoalCard } from '@/composables/goal';
   import { GoalsSchema } from '@/types/goals';
-import Color from 'vuetify/directives/color';
+  import { Icon } from '@iconify/vue'
 
   const goals = GoalsSchema.parse([
     {
       title: 'Estudar Node',
-      icon: '$vuetify',
-      color: 'blue',
+      icon: 'tabler:book',
+      color: 'primary',
       progress: 50,
     },
 
     {
       title: 'Estudar MySQL',
-      icon: '$command',
-      color: 'red',
+      icon: 'tabler:database',
+      color: 'error',
       progress: 95,
     },
 
     {
       title: 'Estudar Adonis',
-      icon: '$eyeDropper',
-      color: 'yellow',
+      icon: 'tabler:star',
+      color: 'warning',
       progress: 5,
     },
 
         {
       title: 'Estudar Adonis',
-      icon: '$eyeDropper',
-      color: 'yellow',
+      icon: 'tabler:star',
+      color: 'warning',
       progress: 5,
     },
   ])
@@ -42,27 +42,31 @@ import Color from 'vuetify/directives/color';
               Study Goals
             </v-card-title>
 
-            <v-btn class="dark-glass-item rounded-lg btn" prepend-icon="mdi-plus" @click="createGoalCard = true">
+            <v-btn class="dark-glass-item rounded-lg btn" @click="createGoalCard = true">
+              <Icon icon="tabler:plus" width="20" height="20" class="me-2" />
               New goal
             </v-btn>
     </div>
 
     <div class="d-flex flex-column overflow-y-hidden ga-2 w-100 pt-1">
       <v-card height="56" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5" v-for="goal in goals.slice(0, 4)">
-        <div>
-          <v-icon :icon="goal.icon" :color="goal.color"></v-icon>
-        </div>
 
-        <div class="d-flex flex-column justify-center ps-5"  style="width: 60%">
-           <p class="ma-1">{{goal.title}}</p>
+        <div class="d-flex ga-4 w-75 align-center" >
+          <div>
+            <Icon :icon="goal.icon" :style="{ color: `rgb(var(--v-theme-${goal.color}))` }" width="24" height="24" />
+          </div>
 
-          <v-progress-linear
-            :model-value="goal.progress"
-            height="8"
-            rounded
-            :color="goal.color"
-            style="width: 95%"
-          />
+          <div class="d-flex flex-column w-100">
+            <p class="ma-1">{{goal.title}}</p>
+
+            <v-progress-linear
+              :model-value="goal.progress"
+              height="8"
+              rounded
+              :color="goal.color"
+              style="width: 95%"
+            />
+          </div>
         </div>
 
         <div class="d-flex align-center ga-2" style="width: 30%;">
@@ -85,4 +89,3 @@ import Color from 'vuetify/directives/color';
 
   </v-card>
 </template>
-

@@ -1,4 +1,5 @@
-<script setup>
+<script setup lang="ts">
+import { Icon } from '@iconify/vue'
 
 </script>
     
@@ -11,9 +12,12 @@
         </div>
 
         <div class="d-flex align-center ga-6">
-            <v-icon-btn icon="mdi-magnify" color="transparent"></v-icon-btn>
-            <v-icon-btn icon="mdi-bell-outline" color="transparent"></v-icon-btn>
-            <v-btn text="Focus Mode" prepend-icon="mdi-bullseye" class="btn rounded-lg"></v-btn>
+            <v-btn icon color="transparent"><Icon icon="tabler:search" width="22" height="22" /></v-btn>
+            <v-btn icon color="transparent"><Icon icon="tabler:bell" width="22" height="22" /></v-btn>
+            <v-btn class="btn rounded-lg">
+              <Icon icon="tabler:target" width="20" height="20" class="me-2" />
+              Focus Mode
+            </v-btn>
         </div>
     </div>
 </template>

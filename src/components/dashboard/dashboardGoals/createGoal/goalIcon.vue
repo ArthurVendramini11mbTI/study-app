@@ -1,33 +1,28 @@
 <script setup lang="ts">
 import { selectIconCard } from '@/composables/goal'
 import {selectedIcon ,selectedColor} from '@/composables/goal'
+import { Icon } from '@iconify/vue'
 
 const icons = [
-  'mdi-book-outline',
-  'mdi-school-outline',
-  'mdi-code-tags',
-  'mdi-laptop',
-  'mdi-calculator',
-  'mdi-flask-outline',
-  'mdi-database-outline',
-  'mdi-brain',
-  'mdi-pencil-outline',
-  'mdi-lightbulb-outline',
-  'mdi-target',
-  'mdi-language-javascript',
-  'mdi-language-typescript',
-  'mdi-language-html5',
-  'mdi-language-css3',
-  'mdi-language-csharp',
-  'mdi-language-c',
-  'mdi-language-cpp',
-  'mdi-language-python',
-  'mdi-language-java',
-  'mdi-language-lua',
-  'mdi-nodejs',
-  'mdi-vuejs',
-  'mdi-react',
-  'mdi-angularjs',
+  'tabler:book',
+  'tabler:school',
+  'tabler:code',
+  'tabler:device-laptop',
+  'tabler:calculator',
+  'tabler:flask',
+  'tabler:database',
+  'tabler:brain',
+  'tabler:pencil',
+  'tabler:bulb',
+  'tabler:target',
+  'tabler:atom',
+  'tabler:math-function',
+  'tabler:terminal-2',
+  'tabler:file-code',
+  'tabler:notebook',
+  'tabler:bookmark',
+  'tabler:trophy',
+  'tabler:rocket',
 ]
 function selectIcon(icon: string) {
   selectedIcon.value = icon
@@ -44,12 +39,12 @@ function confirmSelection() {
 
       <div class="d-flex justify-space-between align-center mb-3">
         <v-card-title>Select an Icon</v-card-title>
-        <v-btn icon="mdi-close" variant="text" size="small" @click="selectIconCard = false"/>
+        <v-btn icon variant="text" size="small" @click="selectIconCard = false"><Icon icon="tabler:x" width="20" height="20" /></v-btn>
       </div>
 
       <div class="icon-grid">
         <v-btn v-for="icon in icons" :key="icon" icon variant="text" class="icon-option" :class="{ 'icon-selected': selectedIcon === icon }" @click="selectIcon(icon)">
-          <v-icon :icon="icon" :color="selectedIcon === icon ? selectedColor : undefined" size="26"/>
+          <Icon :icon="icon" :style="selectedIcon === icon ? { color: selectedColor } : undefined" width="26" height="26" />
         </v-btn>
       </div>
 
@@ -61,7 +56,7 @@ function confirmSelection() {
             <v-btn v-bind="props" variant="text" class="ga-2">
               <div class="color-preview" :style="{ backgroundColor: selectedColor }"/>
               {{ selectedColor }}
-              <v-icon>mdi-chevron-down</v-icon>
+              <Icon icon="tabler:chevron-down" width="18" height="18" />
             </v-btn>
           </template>
 
@@ -70,13 +65,13 @@ function confirmSelection() {
       </div>
 
       <div class="preview mt-4">
-        <v-icon :icon="selectedIcon" :color="selectedColor" size="36"/>
+        <Icon :icon="selectedIcon" :style="{ color: selectedColor }" width="36" height="36" />
         <span class="text-body-2">Preview</span>
       </div>
 
       <div class="d-flex justify-end ga-2 mt-5">
         <v-btn variant="text" @click="selectIconCard = false">Cancel</v-btn>
-        <v-btn class="btn" prepend-icon="mdi-check" @click="confirmSelection">Select</v-btn>
+        <v-btn class="btn" @click="confirmSelection"><Icon icon="tabler:check" width="18" height="18" class="me-2" />Select</v-btn>
       </div>
 
     </v-card>
