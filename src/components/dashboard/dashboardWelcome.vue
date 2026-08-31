@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
 
+</script>
+    
 <template>
-    <v-card  class="w-100 d-flex justify-space-between align-center" color="transparent">
+    <div  class="w-100 d-flex justify-space-between align-center">
         <div class="d-flex flex-column">
             <span class="text-display-small">Hello, Arthur</span>
 
@@ -13,5 +15,5 @@
             <v-icon-btn icon="mdi-bell-outline" color="transparent"></v-icon-btn>
             <v-btn text="Focus Mode" prepend-icon="mdi-bullseye" class="btn rounded-lg"></v-btn>
         </div>
-    </v-card>
+    </div>
 </template>

@@ -5,7 +5,7 @@ const value = ref([new Date()])
 </script>
 
 <template>
-  <v-card class="light-glass-card rounded-xl pa-4 d-flex flex-column" style="min-height: 410px" flat>
+  <v-card class="light-glass-card rounded-xl pa-4 d-flex flex-column" style="height: 100%;" flat>
 
     <div class="d-flex align-center justify-space-between mb-2">
 

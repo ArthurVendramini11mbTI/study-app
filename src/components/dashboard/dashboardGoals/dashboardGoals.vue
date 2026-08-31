@@ -47,7 +47,7 @@ import Color from 'vuetify/directives/color';
             </v-btn>
     </div>
 
-    <div class="d-flex flex-column overflow-y-hidden ga-2 w-100">
+    <div class="d-flex flex-column overflow-y-hidden ga-2 w-100 pt-1">
       <v-card height="56" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5" v-for="goal in goals.slice(0, 4)">
         <div>
           <v-icon :icon="goal.icon" :color="goal.color"></v-icon>
@@ -66,7 +66,7 @@ import Color from 'vuetify/directives/color';
         </div>
 
         <div class="d-flex align-center ga-2" style="width: 30%;">
-          <p style="min-width: 35px;">{{ goal.progress }}%</p>
+          <span style="min-width: 35px;">{{ goal.progress }}%</span>
           <v-chip :color="goal.status.color" class="w-100 d-flex justify-center dark-glass-card">
             <span>{{ goal.status.text }}</span>
           </v-chip>
