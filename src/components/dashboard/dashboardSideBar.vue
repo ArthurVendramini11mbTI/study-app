@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
+
 const user = {
   name: 'Arthur',
 }
@@ -44,9 +46,7 @@ const user = {
                 class="item"
               >
                 <template #prepend>
-                  <v-icon class="menu-icon">
-                    mdi-home-outline
-                  </v-icon>
+                  <Icon icon="tabler:home" width="24" height="24" class="menu-icon"/>
                 </template>
               </v-list-item>
 
@@ -55,9 +55,7 @@ const user = {
                 class="item"
               >
                 <template #prepend>
-                  <v-icon class="menu-icon">
-                    mdi-calendar-outline
-                  </v-icon>
+                  <Icon icon="tabler:calendar" width="24" height="24" class="menu-icon" />
                 </template>
               </v-list-item>
 
@@ -66,9 +64,7 @@ const user = {
                 class="item"
               >
                 <template #prepend>
-                  <v-icon class="menu-icon">
-                    mdi-bullseye-arrow
-                  </v-icon>
+                  <Icon icon="tabler:target-arrow" width="24" height="24" class="menu-icon" />
                 </template>
               </v-list-item>
 
@@ -77,9 +73,7 @@ const user = {
                 class="item"
               >
                 <template #prepend>
-                  <v-icon class="menu-icon">
-                    mdi-book-outline
-                  </v-icon>
+                  <Icon icon="tabler:book" width="24" height="24" class="menu-icon" />
                 </template>
               </v-list-item>
 
@@ -88,9 +82,7 @@ const user = {
                 class="item"
               >
                 <template #prepend>
-                  <v-icon class="menu-icon">
-                    mdi-chart-line
-                  </v-icon>
+                  <Icon icon="tabler:chart-line" width="24" height="24" class="menu-icon" />
                 </template>
               </v-list-item>
 
@@ -99,9 +91,7 @@ const user = {
                 class="item"
               >
                 <template #prepend>
-                  <v-icon class="menu-icon">
-                    mdi-cog-outline
-                  </v-icon>
+                  <Icon icon="tabler:settings" width="24" height="24" class="menu-icon" />
                 </template>
               </v-list-item>
 
@@ -133,6 +123,10 @@ const user = {
 .sidebar-content {
   position: relative;
   z-index: 2;
+}
+
+.item :deep(.v-list-item__prepend) {
+  margin-inline-end: 12px;
 }
 
 
