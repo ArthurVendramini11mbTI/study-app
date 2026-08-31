@@ -11,7 +11,7 @@ import { Icon } from '@iconify/vue'
             },
             goal: {
                 hours: 4,
-                minutes: 0
+                minutes: 50
             }
         },
         streak: {
@@ -28,11 +28,11 @@ import { Icon } from '@iconify/vue'
     }
 
     const studyTimeProgress = computed(() => {
-        return ((categories.time.studied.hours + (categories.time.studied.minutes / 60))/ categories.time.goal.hours) * 100
+        return Math.round(((categories.time.studied.hours + (categories.time.studied.minutes / 60)) / (categories.time.goal.hours + categories.time.goal.minutes / 60)) * 100)
     })
 
     const goalsProgress = computed(() => {
-        return (categories.goals.completedGoals / categories.goals.totalGoals) * 100
+        return Math.round((categories.goals.completedGoals / categories.goals.totalGoals) * 100)
     })
 
 
@@ -43,12 +43,12 @@ import { Icon } from '@iconify/vue'
 <template>
     <v-col cols="3" class="pa-2">
         <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
-            <Icon icon="tabler:clock-hour-8" width="40" height="40" />
+            <Icon icon="tabler:clock-hour-8" width="50" height="50" />
 
             <div class="d-flex flex-column ga-1">
-                <span class="text-body-2">Study Time Today</span>
-                <span class="text-h6 font-weight-bold">{{ categories.time.studied.hours }}h {{ categories.time.studied.minutes }}m</span>
-                <span class="text-body-2 text-medium-emphasis">Goal: {{ categories.time.goal.hours }}h {{ categories.time.goal.minutes }}m</span>
+                <span class="">Study Time Today</span>
+                <span class="font-weight-bold text-headline-small">{{ categories.time.studied.hours }}h {{ categories.time.studied.minutes }}m</span>
+                <span class=" ">Goal: {{ categories.time.goal.hours }}h {{ categories.time.goal.minutes }}m</span>
             </div>
 
             <div>
@@ -60,12 +60,12 @@ import { Icon } from '@iconify/vue'
     </v-col>
     <v-col cols="3" class="pa-2">
         <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
-            <Icon icon="tabler:flame" width="40" height="40" />
+            <Icon icon="tabler:flame" width="50" height="50" />
 
             <div class="d-flex flex-column ga-1">
-                <span class="text-body-2">Streak</span>
-                <span class="text-h6 font-weight-bold">{{ categories.streak.actualStreak}} days</span>
-                <span class="text-body-2 text-medium-emphasis">Best: {{ categories.streak.bestStreak }} days</span>
+                <span class="">Streak</span>
+                <span class="font-weight-bold text-headline-small">{{ categories.streak.actualStreak}} days</span>
+                <span class=" ">Best: {{ categories.streak.bestStreak }} days</span>
             </div>
 
             <div>
@@ -75,12 +75,12 @@ import { Icon } from '@iconify/vue'
     </v-col>
     <v-col cols="3" class="pa-2">
         <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
-            <Icon icon="tabler:circle-check" width="40" height="40" />
+            <Icon icon="tabler:circle-check" width="50" height="50" />
 
             <div class="d-flex flex-column ga-1">
-                <span class="text-body-2">Completed Goals</span>
-                <span class="text-h6 font-weight-bold">{{ categories.goals.completedGoals }} / {{ categories.goals.totalGoals }}</span>
-                <span class="text-body-2 text-medium-emphasis">This month</span>
+                <span class="">Completed Goals</span>
+                <span class="font-weight-bold text-headline-small ">{{ categories.goals.completedGoals }} / {{ categories.goals.totalGoals }}</span>
+                <span class=" ">This month</span>
             </div>
 
             <div>
@@ -92,12 +92,12 @@ import { Icon } from '@iconify/vue'
     </v-col>
     <v-col cols="3" class="pa-2">
         <v-card class="light-glass-card rounded-xl d-flex align-center justify-space-between pa-4" min-height="120">
-            <Icon icon="tabler:clipboard" width="40" height="40" />
+            <Icon icon="tabler:clipboard" width="50" height="50" />
 
             <div class="d-flex flex-column ga-1">
-                <span class="text-body-2">Taks Due</span>
-                <span class="text-h6 font-weight-bold">{{ categories.tasks.tasksDue }}</span>
-                <span class="text-body-2 text-medium-emphasis">Next 7 days</span>
+                <span class="">Taks Due</span>
+                <span class="font-weight-bold text-headline-small ">{{ categories.tasks.tasksDue }}</span>
+                <span class=" ">Next 7 days</span>
             </div>
 
             <div class="d-flex align-center">
