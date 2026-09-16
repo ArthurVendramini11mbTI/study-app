@@ -1,6 +1,7 @@
 <script lang="ts" setup>
     import { ref } from 'vue';
     import router from '@/router';
+    import { login } from '@/services/auth';
 
     const email = ref<string>('')
     const password = ref<string>('')
@@ -29,14 +30,18 @@
         }
     ]
 
-    async function login() {
-        const { valid } = await form.value.validate()
+    async function handleLogin() {
+        const userData = {email: email.value, password: password.value}
 
-        if (!valid) {
-            return
+        try {
+            const data = await login(userData);
+
+            localStorage.setItem("token", data.token);
+
+            router.push({ name: 'dashboard'})
+        } catch {
+            console.log("Email ou senha inválidos")
         }
-
-        router.push({ name: 'dashboard'})
     }
 </script>
 
@@ -47,7 +52,7 @@
             <v-card class="mx-auto d-flex align-center flex-column pa-2 light-glass-card rounded-xl"  width="400"> 
                 <template v-slot:title > <span class="font-weight-black" >Log in to Axis App</span> </template>
                 <v-card-text class="w-100 mt-5">
-                    <v-form @submit.prevent='login' ref="form">
+                    <v-form @submit.prevent='handleLogin' ref="form">
                     <v-text-field label="Email" v-model="email" :rules="emailRules"></v-text-field>
                     <v-text-field label="Password" v-model="password" :rules="passwordRules"></v-text-field>
 
