@@ -3,7 +3,11 @@
   import { getIconColor } from '@/composables/iconColor';
   import { GoalsSchema } from '@/schemas/goalSchema';
   import { Icon } from '@iconify/vue'
+  import { getGoalsService } from '@/services/goalService'
 
+  async function getUserGoals() {
+    const userGoals = await getGoalsService()  
+  }
   const goals = GoalsSchema.parse([
 
 

@@ -69,3 +69,4 @@ export const createGoalInputSchema = z.object({
 
     targetTime: timeSchema,
 })
+
