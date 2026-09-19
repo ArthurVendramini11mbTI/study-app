@@ -31,6 +31,8 @@ function selectIcon(icon: string) {
 function confirmSelection() {
   selectIconCard.value = false
 }
+
+
 </script>
 
 <template>

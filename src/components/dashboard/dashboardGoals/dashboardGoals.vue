@@ -1,7 +1,7 @@
 <script setup lang="ts"> 
   import { createGoalCard } from '@/composables/goal';
   import { getIconColor } from '@/composables/iconColor';
-  import { GoalsSchema } from '@/types/goals';
+  import { GoalsSchema } from '@/schemas/goalSchema';
   import { Icon } from '@iconify/vue'
 
   const goals = GoalsSchema.parse([

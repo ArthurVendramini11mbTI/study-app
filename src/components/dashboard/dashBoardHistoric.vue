@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { studySchema } from '@/types/goals';
+    import { studySchema } from '@/schemas/goalSchema';
     import { getIconColor } from '@/composables/iconColor';
     import { Icon } from '@iconify/vue'
     

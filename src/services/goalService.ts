@@ -5,14 +5,15 @@ export async function createGoalService(createGoalData: createGoalInputType) {
     method: "POST",
 
     headers: {
-      "Content-Type": "application/json",
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
     },
 
     body: JSON.stringify(createGoalData),
   });
 
   if (!response.ok) {
-    throw new Error("Email ou senha inválidos");
+    throw new Error("Invalid Goal");
   }
 
   return response.json();

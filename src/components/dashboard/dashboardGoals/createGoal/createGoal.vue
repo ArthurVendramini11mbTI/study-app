@@ -3,6 +3,8 @@
   import { Icon } from '@iconify/vue'
   import {selectedIcon ,selectedColor, selectIconCard, createGoalCard} from '@/composables/goal'
   import { createGoalService } from '@/services/goalService'
+  import { getUserId } from '@/services/auth'
+  import { createGoalInputSchema } from '@/schemas/goalSchema'
 
 
   const goalName = ref('')
@@ -66,13 +68,36 @@
       async function createGoal() {
         const { valid } = await form.value.validate()
 
-
         if (!valid) {
             return
         }
 
-        createGoalCard.value = false
 
+        const result = createGoalInputSchema.parse({
+          title: goalName.value,
+          description: goalDescription.value,
+
+          color: selectedColor.value,
+          icon: selectedIcon.value,
+
+          targetTime: {
+            hours: Number(goalHours.value),
+            minutes: Number(goalMinutes.value)
+          }
+        })
+
+        if(!result){
+          return console.log(result)
+        }
+
+        try {
+            const data = await createGoalService(result);
+            console.log(data)
+        } catch(err) {
+            console.log(err)
+        }
+
+        createGoalCard.value = false
         goalName.value = ''
         goalDescription.value = ''
         goalHours.value = null
