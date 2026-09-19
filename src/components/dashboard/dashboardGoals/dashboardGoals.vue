@@ -5,33 +5,8 @@
   import { Icon } from '@iconify/vue'
 
   const goals = GoalsSchema.parse([
-    {
-      title: 'Estudar Node',
-      icon: 'tabler:book',
-      color: 'primary',
-      progress: 50,
-    },
 
-    {
-      title: 'Estudar MySQL',
-      icon: 'tabler:database',
-      color: '#79A3E7',
-      progress: 95,
-    },
 
-    {
-      title: 'Estudar Adonis',
-      icon: 'tabler:star',
-      color: 'warning',
-      progress: 67,
-    },
-
-        {
-      title: 'Estudar Adonis',
-      icon: 'tabler:star',
-      color: 'primary',
-      progress: 5,
-    },
   ])
 </script>
 
@@ -49,9 +24,9 @@
             </v-btn>
     </div>
 
-    <div class="d-flex flex-column overflow-y-hidden ga-2 w-100 pt-1">
-      <v-card height="56" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5" v-for="goal in goals.slice(0, 4)">
-
+    <div class="d-flex flex-column overflow-y-hidden ga-2 w-100 pt-4 h-75">
+      <v-card height="56" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5" v-for="goal in goals.slice(0, 4)" v-if="goals.length > 0">
+      
         <div class="d-flex ga-4 w-75 align-center" >
           <div>
           <Icon :icon="goal.icon" :style="{ color: getIconColor(goal.color) }" width="24" height="24" />
@@ -77,7 +52,12 @@
           </v-chip>
         </div>
       </v-card>
+
+      <div v-else class="d-flex justify-center align-center h-75">
+        <v-chip variant="plain">Your goals are empty</v-chip>
+      </div>
     </div>
+
 
     <div>
         <v-btn

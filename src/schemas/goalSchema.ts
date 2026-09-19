@@ -60,8 +60,7 @@ export const studySchema = z.array(z.object({
   }),
 }));
 
-export const createGoalInputSchema = z
-  .object({
+export const createGoalInputSchema = z.object({
     title: z.string().min(1),
     description: z.string().optional(),
 
@@ -69,4 +68,4 @@ export const createGoalInputSchema = z
     icon: z.string().min(1),
 
     targetTime: timeSchema,
-  })
+})
