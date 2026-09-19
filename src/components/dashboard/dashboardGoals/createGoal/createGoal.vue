@@ -1,9 +1,9 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { Icon } from '@iconify/vue'
-
   import {selectedIcon ,selectedColor, selectIconCard, createGoalCard} from '@/composables/goal'
-import { number } from 'zod';
+  import { createGoalService } from '@/services/goalService'
+
 
   const goalName = ref('')
   const goalDescription = ref('')
@@ -78,6 +78,7 @@ import { number } from 'zod';
         goalHours.value = null
         goalMinutes.value = null
     }
+
 </script>
 
 <template>

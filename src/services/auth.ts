@@ -1,4 +1,5 @@
 import type { userType } from "@/types/userTypes";
+import { jwtDecode } from "jwt-decode";
 
 export async function login(userData: userType) {
   const response = await fetch("http://localhost:5000/users/login", {
@@ -34,4 +35,22 @@ export async function sign(userData: userType) {
   }
 
   return response.json();
+}
+
+type JwtPayload = {
+  sub: string;
+  iat: number;
+  exp: number;
+};
+
+export function getUserId() {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    return null;
+  }
+
+  const payload = jwtDecode<JwtPayload>(token);
+
+  return Number(payload.sub);
 }
