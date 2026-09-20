@@ -5,42 +5,45 @@ export const GoalsSchema = z.array(
     title: z.string(),
     icon: z.string(),
     color: z.string(),
-    progress: z
-      .number()
-      .min(0)
-      .max(100),
+
+    target_seconds: z.number().int().positive(),
+
+    accumulated_seconds: z.number().int().nonnegative(),
   })
 ).transform((goals) => {
   return goals.map((goal) => {
-    if (goal.progress <= 15) {
-      return {
-        ...goal,
-        status: {
-          text: 'At risk',
-          color: 'warning',
-        },
-      }
-    }
+    const progress = Math.min(Math.round((goal.accumulated_seconds / goal.target_seconds) * 100),100);
 
-    if (goal.progress <= 89) {
-      return {
-        ...goal,
-        status: {
-          text: 'In progress',
-          color: 'blue',
-        },
-      }
+    let status;
+
+    if (progress <= 15) {
+      status = {
+        text: "Time to start!",
+        color: "warning",
+      };
+    } else if (progress <= 89) {
+      status = {
+        text: "In progress",
+        color: "blue",
+      };
+    } else {
+      status = {
+        text: "Almost done",
+        color: "success",
+      };
     }
 
     return {
-      ...goal,
-      status: {
-        text: 'Almost done',
-        color: 'success',
-      },
-    }
-  })
-})
+      title: goal.title,
+      icon: goal.icon,
+      color: goal.color,
+      progress,
+      status,
+    };
+  });
+});
+
+
 
 const timeSchema = z.object({
   hours: z.number().int().nonnegative(),
