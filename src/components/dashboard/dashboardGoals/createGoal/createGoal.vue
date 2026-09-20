@@ -4,7 +4,7 @@
   import {selectIconCard, createGoalCard} from '@/composables/goal'
   import { createGoalService } from '@/services/goalService'
   import { createGoalInputSchema } from '@/schemas/goalSchema'
-  import { goalForm } from '@/composables/goal'
+  import { goalForm, editingGoal } from '@/composables/goal'
 
   const form = ref()
 
@@ -98,8 +98,8 @@
 <template>
   <div class="pa-4 text-center ">
     <v-dialog v-model="createGoalCard" max-width="500" >
-      <v-card title="Create a goal"  class="dark-glass-card rounded-xl">
-        <template #prepend><Icon icon="tabler:target-arrow" width="24" height="24" /></template>
+      <v-card :title="editingGoal ? 'Edit goal' : 'Create a goal'"  class="dark-glass-card rounded-xl">
+        <template #prepend><Icon :icon="editingGoal ? 'tabler:pencil' : 'tabler:target-arrow'" width="24" height="24" /></template>
         <v-card-text>
             <v-form ref="form" @submit.prevent="createGoal">
               <v-text-field label="Goal name" v-model="goalForm.name" :rules="requiredRule"></v-text-field>
@@ -126,8 +126,8 @@
               <v-card-actions class="mr-4">
                 <v-spacer></v-spacer>
                 <v-btn text="Close" variant="plain" @click="createGoalCard = false"></v-btn>
-
-                <v-btn  text="Save" class="btn" type="submit"></v-btn>
+                <v-btn  v-if="editingGoal" text="delete" color="red"></v-btn>
+                <v-btn  class="btn" type="submit">{{ editingGoal ? "Save changes" : "Create"}}</v-btn>
               </v-card-actions>
             </v-form>
         </v-card-text>
