@@ -1,14 +1,32 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { Icon } from "@iconify/vue";
-import { createGoalCard } from "@/composables/goal";
 import { getIconColor } from "@/composables/iconColor";
 import { GoalsSchema } from "@/schemas/goalSchema";
 import { getGoalsService } from "@/services/goalService";
+import {createGoalCard,goalForm} from '@/composables/goal'
 
 type Goals = ReturnType<typeof GoalsSchema.parse>;
 
 const goals = ref<Goals>([]);
+
+function editGoal(id: number){
+  for(let i = 0;i < goals.value.length; i++){
+    if(id === goals.value[i].id){
+      const goalIndex = i
+
+      goalForm.name = goals.value[goalIndex].title
+      goalForm.description = goals.value[goalIndex].description
+
+      goalForm.color = goals.value[goalIndex].color
+      goalForm.icon = goals.value[goalIndex].icon
+
+      goalForm.hours = goals.value[goalIndex].targetTime.hours
+      goalForm.minutes = goals.value[goalIndex].targetTime.minutes
+    }
+  }
+}
+
 
 onMounted(async () => {
   try {
@@ -35,8 +53,7 @@ onMounted(async () => {
 
     <div class="d-flex flex-column overflow-y-hidden ga-2 w-100 pt-4 h-75">
       <template v-if="goals.length > 0">
-        <v-card
-          v-for="goal in goals.slice(0, 4)" :key="goal.title" height="56" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5">
+        <v-card @click="createGoalCard = true, editGoal(goal.id)" v-for="goal in goals.slice(0, 4)" :key="goal.id" height="56" class="mx-auto w-100 inner-card card rounded-lg d-flex justify-space-between align-center px-5">
           <div class="d-flex ga-4 w-75 align-center">
             <div>
               <Icon :icon="goal.icon" :style="{ color: getIconColor(goal.color) }" width="28" height="28"/>

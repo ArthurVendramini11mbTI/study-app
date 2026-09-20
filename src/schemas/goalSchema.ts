@@ -3,16 +3,31 @@ import { z } from 'zod'
 export const GoalsSchema = z.array(
   z.object({
     title: z.string(),
+    description: z.string(),
     icon: z.string(),
     color: z.string(),
-
     target_seconds: z.number().int().positive(),
-
     accumulated_seconds: z.number().int().nonnegative(),
+    id: z.number().int().positive(),
   })
 ).transform((goals) => {
   return goals.map((goal) => {
-    const progress = Math.min(Math.round((goal.accumulated_seconds / goal.target_seconds) * 100),100);
+    const progress = Math.min(
+      Math.round(
+        (goal.accumulated_seconds / goal.target_seconds) * 100
+      ),
+      100
+    );
+
+    const targetTime = {
+      hours: Math.floor(goal.target_seconds / 3600),
+      minutes: Math.floor((goal.target_seconds % 3600) / 60),
+    };
+
+    const accumulatedTime = {
+      hours: Math.floor(goal.accumulated_seconds / 3600),
+      minutes: Math.floor((goal.accumulated_seconds % 3600) / 60),
+    };
 
     let status;
 
@@ -35,10 +50,16 @@ export const GoalsSchema = z.array(
 
     return {
       title: goal.title,
+      description: goal.description,
       icon: goal.icon,
       color: goal.color,
+      id: goal.id,
+
       progress,
       status,
+
+      targetTime,
+      accumulatedTime,
     };
   });
 });

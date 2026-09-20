@@ -1,16 +1,10 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { Icon } from '@iconify/vue'
-  import {selectedIcon ,selectedColor, selectIconCard, createGoalCard} from '@/composables/goal'
+  import {selectIconCard, createGoalCard} from '@/composables/goal'
   import { createGoalService } from '@/services/goalService'
-  import { getUserId } from '@/services/auth'
   import { createGoalInputSchema } from '@/schemas/goalSchema'
-
-
-  const goalName = ref('')
-  const goalDescription = ref('')
-  const goalHours = ref<number | null>()
-  const goalMinutes = ref<number | null>()
+  import { goalForm } from '@/composables/goal'
 
   const form = ref()
 
@@ -57,8 +51,8 @@
     ]
 
     const timeTogetherRule = () => {
-      const hours = Number(goalHours.value ?? 0)
-      const minutes = Number(goalMinutes.value ?? 0)
+      const hours = Number(goalForm.hours ?? 0)
+      const minutes = Number(goalForm.minutes ?? 0)
 
       return hours > 0 || minutes > 0
         ? true
@@ -74,15 +68,15 @@
 
 
         const result = createGoalInputSchema.parse({
-          title: goalName.value,
-          description: goalDescription.value,
+          title: goalForm.name,
+          description: goalForm.description,
 
-          color: selectedColor.value,
-          icon: selectedIcon.value,
+          color: goalForm.color,
+          icon: goalForm.icon,
 
           targetTime: {
-            hours: Number(goalHours.value),
-            minutes: Number(goalMinutes.value)
+            hours: Number(goalForm.hours),
+            minutes: Number(goalForm.minutes)
           }
         })
 
@@ -96,12 +90,6 @@
         } catch(err) {
             console.log(err)
         }
-
-        createGoalCard.value = false
-        goalName.value = ''
-        goalDescription.value = ''
-        goalHours.value = null
-        goalMinutes.value = null
     }
 
 </script>
@@ -113,22 +101,22 @@
         <template #prepend><Icon icon="tabler:target-arrow" width="24" height="24" /></template>
         <v-card-text>
             <v-form ref="form" @submit.prevent="createGoal">
-              <v-text-field label="Goal name" v-model="goalName" :rules="requiredRule"></v-text-field>
-              <v-text-field label="Goal description" v-model="goalDescription" :rules="requiredRule"></v-text-field>
+              <v-text-field label="Goal name" v-model="goalForm.name" :rules="requiredRule"></v-text-field>
+              <v-text-field label="Goal description" v-model="goalForm.description" :rules="requiredRule"></v-text-field>
 
               <v-row>
                 <v-col cols="2">
                   <v-btn class="icon-selector w-100" variant="flat" height="56" @click="selectIconCard = true">
                     <div class="d-flex flex-column align-center justify-center ga-1">
-                      <Icon :icon="selectedIcon" :style="{ color: selectedColor }" width="28" height="28" />
+                      <Icon :icon="goalForm.icon" :style="{ color: goalForm.color }" width="28" height="28" />
                       <span class="text-caption">Icon</span>
                     </div>
                   </v-btn>
                 </v-col>
 
                 <v-col cols="10" class="d-flex ga-2">
-                  <v-text-field label="Hours" :rules="[...hoursRules, timeTogetherRule]" v-model="goalHours"/>
-                  <v-text-field label="Minutes"  :rules="[...minutesRules,timeTogetherRule]" v-model="goalMinutes"/>
+                  <v-text-field label="Hours" :rules="[...hoursRules, timeTogetherRule]" v-model="goalForm.hours"/>
+                  <v-text-field label="Minutes"  :rules="[...minutesRules,timeTogetherRule]" v-model="goalForm.minutes"/>
                 </v-col>
               </v-row>
 
