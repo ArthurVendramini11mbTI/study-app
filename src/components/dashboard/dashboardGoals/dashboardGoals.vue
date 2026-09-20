@@ -4,29 +4,47 @@ import { Icon } from "@iconify/vue";
 import { getIconColor } from "@/composables/iconColor";
 import { GoalsSchema } from "@/schemas/goalSchema";
 import { getGoalsService } from "@/services/goalService";
-import {createGoalCard,goalForm} from '@/composables/goal'
+import {createGoalCard,goalForm, editingGoal} from '@/composables/goal'
 
 type Goals = ReturnType<typeof GoalsSchema.parse>;
 
 const goals = ref<Goals>([]);
 
-function editGoal(id: number){
-  for(let i = 0;i < goals.value.length; i++){
-    if(id === goals.value[i].id){
-      const goalIndex = i
-
-      goalForm.name = goals.value[goalIndex].title
-      goalForm.description = goals.value[goalIndex].description
-
-      goalForm.color = goals.value[goalIndex].color
-      goalForm.icon = goals.value[goalIndex].icon
-
-      goalForm.hours = goals.value[goalIndex].targetTime.hours
-      goalForm.minutes = goals.value[goalIndex].targetTime.minutes
-    }
-  }
+function resetGoalForm() {
+  goalForm.name = "";
+  goalForm.description = "";
+  goalForm.color = "#3b82f6";
+  goalForm.icon = "tabler:book";
+  goalForm.hours = null;
+  goalForm.minutes = null;
 }
 
+function newGoal() {
+  editingGoal.value = false;
+
+  resetGoalForm();
+
+  createGoalCard.value = true;
+}
+
+function editGoal(id: number) {
+  const goal = goals.value.find((goal) => goal.id === id);
+
+  if (!goal) {
+    return;
+  }
+
+  editingGoal.value = true;
+
+  goalForm.name = goal.title;
+  goalForm.description = goal.description;
+  goalForm.color = goal.color;
+  goalForm.icon = goal.icon;
+  goalForm.hours = goal.targetTime.hours;
+  goalForm.minutes = goal.targetTime.minutes;
+
+  createGoalCard.value = true;
+}
 
 onMounted(async () => {
   try {
@@ -37,6 +55,7 @@ onMounted(async () => {
     console.error("Erro ao buscar goals:", error);
   }
 });
+
 </script>
 
 <template>
@@ -45,7 +64,7 @@ onMounted(async () => {
     <div class="d-flex justify-space-between align-center mb-2 w-100">
             <v-card-title>Study Goals</v-card-title>
 
-            <v-btn class="dark-glass-item rounded-lg btn" @click="createGoalCard = true">
+            <v-btn class="dark-glass-item rounded-lg btn" @click="newGoal">
               <Icon icon="tabler:plus" width="20" height="20" class="me-2" />
               New goal
             </v-btn>

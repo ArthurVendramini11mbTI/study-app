@@ -5,6 +5,8 @@
 
   export const selectIconCard = ref(false)
 
+  export const editingGoal = ref(false)
+
   export const goalForm = reactive({
     name: "",
     description: "",

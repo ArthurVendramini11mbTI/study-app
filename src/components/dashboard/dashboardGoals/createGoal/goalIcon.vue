@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { selectIconCard } from '@/composables/goal'
-import {selectedIcon ,selectedColor} from '@/composables/goal'
+import {goalForm} from '@/composables/goal'
 import { Icon } from '@iconify/vue'
 
 const icons = [
@@ -25,7 +25,7 @@ const icons = [
   'tabler:rocket',
 ]
 function selectIcon(icon: string) {
-  selectedIcon.value = icon
+  goalForm.icon = icon
 }
 
 function confirmSelection() {
@@ -45,8 +45,8 @@ function confirmSelection() {
       </div>
 
       <div class="icon-grid">
-        <v-btn v-for="icon in icons" :key="icon" icon variant="text" class="icon-option" :class="{ 'icon-selected': selectedIcon === icon }" @click="selectIcon(icon)">
-          <Icon :icon="icon" :style="selectedIcon === icon ? { color: selectedColor } : undefined" width="26" height="26" />
+        <v-btn v-for="icon in icons" :key="icon" icon variant="text" class="icon-option" :class="{ 'icon-selected': goalForm.icon === icon }" @click="selectIcon(icon)">
+          <Icon :icon="icon" :style="goalForm.color === icon ? { color: goalForm.color } : undefined" width="26" height="26" />
         </v-btn>
       </div>
 
@@ -56,18 +56,18 @@ function confirmSelection() {
         <v-menu location="bottom end" :close-on-content-click="false">
           <template #activator="{ props }">
             <v-btn v-bind="props" variant="text" class="ga-2">
-              <div class="color-preview" :style="{ backgroundColor: selectedColor }"/>
-              {{ selectedColor }}
+              <div class="color-preview" :style="{ backgroundColor: goalForm.color }"/>
+              {{ goalForm.color }}
               <Icon icon="tabler:chevron-down" width="18" height="18" />
             </v-btn>
           </template>
 
-          <v-color-picker v-model="selectedColor" hide-inputs class="dark-glass-card"/>
+          <v-color-picker v-model="goalForm.color" hide-inputs class="dark-glass-card"/>
         </v-menu>
       </div>
 
       <div class="preview mt-4">
-        <Icon :icon="selectedIcon" :style="{ color: selectedColor }" width="36" height="36" />
+        <Icon :icon="goalForm.icon" :style="{ color: goalForm.color }" width="36" height="36" />
         <span class="text-body-2">Preview</span>
       </div>
 
