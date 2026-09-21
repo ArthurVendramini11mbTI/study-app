@@ -4,11 +4,11 @@ import { Icon } from "@iconify/vue";
 import { getIconColor } from "@/composables/iconColor";
 import { GoalsSchema } from "@/schemas/goalSchema";
 import { getGoalsService } from "@/services/goalService";
-import {createGoalCard,goalForm, editingGoal} from '@/composables/goal'
+import {createGoalCard,goalForm, editingGoal, selectedGoalId} from '@/composables/goal'
 
-type Goals = ReturnType<typeof GoalsSchema.parse>;
+ type Goals = ReturnType<typeof GoalsSchema.parse>;
 
-const goals = ref<Goals>([]);
+ const goals = ref<Goals>([]);
 
 function resetGoalForm() {
   goalForm.name = "";
@@ -35,6 +35,8 @@ function editGoal(id: number) {
   }
 
   editingGoal.value = true;
+
+  selectedGoalId.value = goal.id
 
   goalForm.name = goal.title;
   goalForm.description = goal.description;

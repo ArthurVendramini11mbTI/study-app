@@ -2,9 +2,9 @@
   import { ref } from 'vue';
   import { Icon } from '@iconify/vue'
   import {selectIconCard, createGoalCard} from '@/composables/goal'
-  import { createGoalService } from '@/services/goalService'
+  import { createGoalService, deleteGoalService } from '@/services/goalService'
   import { createGoalInputSchema } from '@/schemas/goalSchema'
-  import { goalForm, editingGoal } from '@/composables/goal'
+  import { goalForm, editingGoal, selectedGoalId } from '@/composables/goal'
 
   const form = ref()
 
@@ -90,15 +90,30 @@
         } catch(err) {
             console.log(err)
         }
+
+        createGoalCard.value = false
     }
 
+    async function deleteGoal() {
+      try{
+        if(selectedGoalId.value){
+          const deletedGoal = await deleteGoalService(selectedGoalId.value)
+          console.log(deletedGoal)
+        }
+
+        selectedGoalId.value = null
+        createGoalCard.value = false
+      }catch(err){
+        console.error("Erro ao deleter a goal", err)
+    }
+}
 
 </script>
 
 <template>
   <div class="pa-4 text-center ">
     <v-dialog v-model="createGoalCard" max-width="500" >
-      <v-card :title="editingGoal ? 'Edit goal' : 'Create a goal'"  class="dark-glass-card rounded-xl">
+      <v-card :title="editingGoal ? 'Edit goal' : 'Create goal'"  class="dark-glass-card rounded-xl">
         <template #prepend><Icon :icon="editingGoal ? 'tabler:pencil' : 'tabler:target-arrow'" width="24" height="24" /></template>
         <v-card-text>
             <v-form ref="form" @submit.prevent="createGoal">
@@ -126,8 +141,8 @@
               <v-card-actions class="mr-4">
                 <v-spacer></v-spacer>
                 <v-btn text="Close" variant="plain" @click="createGoalCard = false"></v-btn>
-                <v-btn  v-if="editingGoal" text="delete" color="red"></v-btn>
-                <v-btn  class="btn" type="submit">{{ editingGoal ? "Save changes" : "Create"}}</v-btn>
+                <v-btn  v-if="editingGoal" @click="deleteGoal()" text="Delete" color="red"></v-btn>
+                <v-btn  class="btn" type="submit">{{ editingGoal ? "Save" : "Create"}}</v-btn>
               </v-card-actions>
             </v-form>
         </v-card-text>

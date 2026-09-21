@@ -7,6 +7,8 @@
 
   export const editingGoal = ref(false)
 
+  export const selectedGoalId = ref<number | null>(null);
+
   export const goalForm = reactive({
     name: "",
     description: "",
