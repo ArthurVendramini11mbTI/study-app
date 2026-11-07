@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { Icon } from '@iconify/vue'
-  import {selectIconCard, createGoalCard} from '@/composables/goal'
-  import { createGoalService, deleteGoalService } from '@/services/goalService'
+  import {selectIconCard, createGoalCard, goalsRefreshKey} from '@/composables/goal'
+  import { createGoalService, updateGoalService, deleteGoalService } from '@/services/goalService'
   import { createGoalInputSchema } from '@/schemas/goalSchema'
   import { goalForm, editingGoal, selectedGoalId } from '@/composables/goal'
 
@@ -59,7 +59,7 @@
         : 'Hours and minutes cannot both be 0'
     }
 
-      async function createGoal() {
+      async function submitGoal() {
         const { valid } = await form.value.validate()
 
         if (!valid) {
@@ -80,25 +80,26 @@
           }
         })
 
-        if(!result){
-          return console.log(result)
-        }
-
         try {
-            const data = await createGoalService(result);
-            console.log(data)
-        } catch(err) {
-            console.log(err)
-        }
+            if (editingGoal.value && selectedGoalId.value) {
+              await updateGoalService(selectedGoalId.value, result)
+            } else {
+              await createGoalService(result)
+            }
 
-        createGoalCard.value = false
+            goalsRefreshKey.value++
+            selectedGoalId.value = null
+            createGoalCard.value = false
+        } catch(err) {
+            console.error("Erro ao salvar goal", err)
+        }
     }
 
     async function deleteGoal() {
       try{
         if(selectedGoalId.value){
-          const deletedGoal = await deleteGoalService(selectedGoalId.value)
-          console.log(deletedGoal)
+          await deleteGoalService(selectedGoalId.value)
+          goalsRefreshKey.value++
         }
 
         selectedGoalId.value = null
@@ -116,7 +117,7 @@
       <v-card :title="editingGoal ? 'Edit goal' : 'Create goal'"  class="dark-glass-card rounded-xl">
         <template #prepend><Icon :icon="editingGoal ? 'tabler:pencil' : 'tabler:target-arrow'" width="24" height="24" /></template>
         <v-card-text>
-            <v-form ref="form" @submit.prevent="createGoal">
+            <v-form ref="form" @submit.prevent="submitGoal">
               <v-text-field label="Goal name" v-model="goalForm.name" :rules="requiredRule"></v-text-field>
               <v-text-field label="Goal description" v-model="goalForm.description" :rules="requiredRule"></v-text-field>
 
@@ -141,7 +142,7 @@
               <v-card-actions class="mr-4">
                 <v-spacer></v-spacer>
                 <v-btn text="Close" variant="plain" @click="createGoalCard = false"></v-btn>
-                <v-btn  v-if="editingGoal" @click="deleteGoal()" text="Delete" color="red"></v-btn>
+                <v-btn v-if="editingGoal" type="button" @click="deleteGoal()" text="Delete" color="red"></v-btn>
                 <v-btn  class="btn" type="submit">{{ editingGoal ? "Save" : "Create"}}</v-btn>
               </v-card-actions>
             </v-form>

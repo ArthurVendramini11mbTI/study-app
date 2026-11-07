@@ -9,6 +9,8 @@
 
   export const selectedGoalId = ref<number | null>(null);
 
+  export const goalsRefreshKey = ref(0)
+
   export const goalForm = reactive({
     name: "",
     description: "",

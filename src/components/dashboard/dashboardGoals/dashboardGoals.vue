@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { Icon } from "@iconify/vue";
 import { getIconColor } from "@/composables/iconColor";
 import { GoalsSchema } from "@/schemas/goalSchema";
 import { getGoalsService } from "@/services/goalService";
-import {createGoalCard,goalForm, editingGoal, selectedGoalId} from '@/composables/goal'
+import {createGoalCard, goalForm, editingGoal, selectedGoalId, goalsRefreshKey} from '@/composables/goal'
 
  type Goals = ReturnType<typeof GoalsSchema.parse>;
 
@@ -48,7 +48,7 @@ function editGoal(id: number) {
   createGoalCard.value = true;
 }
 
-onMounted(async () => {
+async function loadGoals() {
   try {
     const goalsFromAPI = await getGoalsService();
 
@@ -56,7 +56,11 @@ onMounted(async () => {
   } catch (error) {
     console.error("Erro ao buscar goals:", error);
   }
-});
+}
+
+onMounted(loadGoals);
+
+watch(goalsRefreshKey, loadGoals);
 
 </script>
 

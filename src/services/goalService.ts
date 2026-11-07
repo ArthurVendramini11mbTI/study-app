@@ -36,6 +36,25 @@ export async function getGoalsService() {
   return response.json();
 }
 
+export async function updateGoalService(goalId: number, updateGoalData: createGoalInputType) {
+  const response = await fetch(`http://localhost:5000/goals/update-goal/${goalId}`, {
+    method: "PUT",
+
+    headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+    },
+
+    body: JSON.stringify(updateGoalData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Erro ao atualizar goal");
+  }
+
+  return response.json();
+}
+
 export async function deleteGoalService(goalId: number) {
   const response = await fetch(`http://localhost:5000/goals/delete-goal/${goalId}`, {
     method: "DELETE",
