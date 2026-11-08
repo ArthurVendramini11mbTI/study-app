@@ -8,6 +8,7 @@ export const GoalsSchema = z.array(
     color: z.string(),
     target_seconds: z.number().int().positive(),
     accumulated_seconds: z.number().int().nonnegative(),
+    started_at: z.string().nullable(),
     id: z.number().int().positive(),
   })
 ).transform((goals) => {
@@ -54,6 +55,7 @@ export const GoalsSchema = z.array(
       icon: goal.icon,
       color: goal.color,
       id: goal.id,
+      startedAt: goal.started_at ? new Date(goal.started_at) : null,
 
       progress,
       status,

@@ -40,7 +40,7 @@
 
             router.push({ name: 'dashboard'})
         } catch {
-            console.log("Email ou senha inválidos")
+            console.log("Invalid email or password")
         }
     }
 </script>

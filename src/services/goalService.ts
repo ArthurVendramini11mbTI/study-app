@@ -30,7 +30,7 @@ export async function getGoalsService() {
   });
 
   if (!response.ok) {
-    throw new Error("Error zuadoi");
+    throw new Error("Unable to fetch goals");
   }
 
   return response.json();
@@ -49,7 +49,27 @@ export async function updateGoalService(goalId: number, updateGoalData: createGo
   });
 
   if (!response.ok) {
-    throw new Error("Erro ao atualizar goal");
+    throw new Error("Unable to update goal");
+  }
+
+  return response.json();
+}
+
+export async function trackGoalTimeService(goalId: number, action: 'start' | 'stop') {
+  const response = await fetch(`http://localhost:5000/goals/track-time/${goalId}`, {
+    method: "PATCH",
+
+    headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+    },
+
+    body: JSON.stringify({ action }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null)
+    throw new Error(errorData?.message ?? "Unable to track goal time");
   }
 
   return response.json();
@@ -67,7 +87,7 @@ export async function deleteGoalService(goalId: number) {
   });
 
   if (!response.ok) {
-    throw new Error("Erro ao excluir goal");
+    throw new Error("Unable to delete goal");
   }
 
   return response.json();

@@ -13,7 +13,7 @@ export async function login(userData: userType) {
   });
 
   if (!response.ok) {
-    throw new Error("Email ou senha inválidos");
+    throw new Error("Invalid email or password");
   }
 
   return response.json();
@@ -31,7 +31,7 @@ export async function sign(userData: userType) {
   });
 
   if (!response.ok) {
-    throw new Error("Email ou senha inválidos");
+    throw new Error("Invalid email or password");
   }
 
   return response.json();

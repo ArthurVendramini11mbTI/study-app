@@ -4,6 +4,15 @@ import { Icon } from '@iconify/vue'
 const user = {
   name: 'Arthur',
 }
+
+const navigation = [
+  { title: 'Dashboard', icon: 'tabler:home', to: '/dashboard' },
+  { title: 'Calendar', icon: 'tabler:calendar', to: '/calendar' },
+  { title: 'Goals', icon: 'tabler:target-arrow', to: '/goals' },
+  { title: 'Subjects', icon: 'tabler:book', to: '/subjects' },
+  { title: 'Progress', icon: 'tabler:chart-line', to: '/progress' },
+  { title: 'Settings', icon: 'tabler:settings', to: '/settings' },
+]
 </script>
 
 <template>
@@ -17,7 +26,7 @@ const user = {
         permanent
         class="light-glass-card sidebar rounded-xl"
       >
-        <!-- Conteúdo -->
+        <!-- Content -->
         <v-list
           nav
           class="
@@ -38,67 +47,26 @@ const user = {
               </p>
             </div>
 
-            <!-- Navegação -->
+            <!-- Navigation -->
             <div class="d-flex flex-column ga-2">
 
               <v-list-item
-                title="Dashboard"
+                v-for="item in navigation"
+                :key="item.to"
+                :title="item.title"
+                :to="item.to"
                 class="item"
+                rounded="lg"
               >
                 <template #prepend>
-                  <Icon icon="tabler:home" width="24" height="24" class="menu-icon"/>
-                </template>
-              </v-list-item>
-
-              <v-list-item
-                title="Calendar"
-                class="item"
-              >
-                <template #prepend>
-                  <Icon icon="tabler:calendar" width="24" height="24" class="menu-icon" />
-                </template>
-              </v-list-item>
-
-              <v-list-item
-                title="Goals"
-                class="item"
-              >
-                <template #prepend>
-                  <Icon icon="tabler:target-arrow" width="24" height="24" class="menu-icon" />
-                </template>
-              </v-list-item>
-
-              <v-list-item
-                title="Subjects"
-                class="item"
-              >
-                <template #prepend>
-                  <Icon icon="tabler:book" width="24" height="24" class="menu-icon" />
-                </template>
-              </v-list-item>
-
-              <v-list-item
-                title="Progress"
-                class="item"
-              >
-                <template #prepend>
-                  <Icon icon="tabler:chart-line" width="24" height="24" class="menu-icon" />
-                </template>
-              </v-list-item>
-
-              <v-list-item
-                title="Settings"
-                class="item"
-              >
-                <template #prepend>
-                  <Icon icon="tabler:settings" width="24" height="24" class="menu-icon" />
+                  <Icon :icon="item.icon" width="24" height="24" class="menu-icon"/>
                 </template>
               </v-list-item>
 
             </div>
           </div>
 
-          <!-- Perfil -->
+          <!-- Profile -->
           <div class="mb-2">
             <v-list-item
               :title="user.name"
@@ -127,6 +95,11 @@ const user = {
 
 .item :deep(.v-list-item__prepend) {
   margin-inline-end: 12px;
+}
+
+.item.v-list-item--active {
+  background: rgba(var(--v-theme-primary), 0.18);
+  color: rgb(var(--v-theme-on-background));
 }
 
 

@@ -54,7 +54,7 @@ async function loadGoals() {
 
     goals.value = GoalsSchema.parse(goalsFromAPI);
   } catch (error) {
-    console.error("Erro ao buscar goals:", error);
+    console.error("Unable to fetch goals:", error);
   }
 }
 

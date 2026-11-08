@@ -91,7 +91,7 @@
             selectedGoalId.value = null
             createGoalCard.value = false
         } catch(err) {
-            console.error("Erro ao salvar goal", err)
+            console.error("Unable to save goal", err)
         }
     }
 
@@ -105,7 +105,7 @@
         selectedGoalId.value = null
         createGoalCard.value = false
       }catch(err){
-        console.error("Erro ao deleter a goal", err)
+        console.error("Unable to delete goal", err)
     }
 }
 
