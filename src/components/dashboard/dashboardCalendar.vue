@@ -40,10 +40,10 @@ function nextMonth() {
       <span class="text-subtitle-1 font-weight-medium">{{ currentMonth }}</span>
 
       <div class="d-flex ga-4">
-        <v-btn variant="text" size="small" class="btn rounded-lg" @click="previousMonth">
+        <v-btn variant="text" size="small" class="btn btn-secondary rounded-lg" @click="previousMonth">
           <Icon icon="tabler:chevron-left" width="20" height="20" />
         </v-btn>
-        <v-btn variant="text" size="small" class="btn rounded-lg" @click="nextMonth">
+        <v-btn variant="text" size="small" class="btn btn-secondary rounded-lg" @click="nextMonth">
           <Icon icon="tabler:chevron-right" width="20" height="20" />
         </v-btn>
       </div>

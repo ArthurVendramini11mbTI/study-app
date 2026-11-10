@@ -12,39 +12,18 @@ import { VSparkline } from 'vuetify/components/VSparkline'
 // Styles
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
+import { vuetifyThemes } from '@/themes/palettes'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
-export default createVuetify({
+const vuetify = createVuetify({
   theme: {
-    defaultTheme: 'axisBlue',
-
-    themes: {
-      axisBlue: {
-        dark: true,
-
-        colors: {
-          background: '#0b1f3a',
-          surface: '#12345b',
-
-          primary: '#3b82f6',
-          secondary: '#60a5fa',
-          accent: '#38bdf8',
-
-          'on-background': '#eff6ff',
-          'on-surface': '#eff6ff',
-
-          muted: '#bfdbfe',
-
-          success: '#22c55e',
-          warning: '#facc15',
-          error: '#ef4444',
-          info: '#38bdf8',
-        },
-      },
-    },
+    defaultTheme: 'blue',
+    themes: vuetifyThemes,
   },
 
   components:{
     VProgress
   }
 })
+
+export default vuetify

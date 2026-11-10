@@ -14,7 +14,7 @@ import { Icon } from '@iconify/vue'
         <div class="d-flex align-center ga-6">
             <v-btn icon color="transparent"><Icon icon="tabler:search" width="22" height="22" /></v-btn>
             <v-btn icon color="transparent"><Icon icon="tabler:bell" width="22" height="22" /></v-btn>
-            <v-btn class="btn rounded-lg">
+            <v-btn class="btn btn-primary rounded-lg">
               <Icon icon="tabler:target" width="20" height="20" class="me-2" />
               Focus Mode
             </v-btn>

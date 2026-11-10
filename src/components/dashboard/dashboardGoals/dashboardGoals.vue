@@ -70,7 +70,7 @@ watch(goalsRefreshKey, loadGoals);
     <div class="d-flex justify-space-between align-center mb-2 w-100">
             <v-card-title>Study Goals</v-card-title>
 
-            <v-btn class="dark-glass-item rounded-lg btn" @click="newGoal">
+            <v-btn class="dark-glass-item rounded-lg btn btn-primary" @click="newGoal">
               <Icon icon="tabler:plus" width="20" height="20" class="me-2" />
               New goal
             </v-btn>
@@ -94,7 +94,7 @@ watch(goalsRefreshKey, loadGoals);
           <div class="d-flex align-center ga-2" style="width: 30%">
             <span style="min-width: 35px">{{ goal.progress }}%</span>
 
-            <v-chip :color="goal.status.color" class="w-100 d-flex justify-center dark-glass-card">{{ goal.status.text }}</v-chip>
+            <v-chip :color="goal.status.color" variant="tonal" class="w-100 d-flex justify-center">{{ goal.status.text }}</v-chip>
           </div>
         </v-card>
       </template>

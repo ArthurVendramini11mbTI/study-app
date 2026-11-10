@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import CalendarGoals from '@/components/calendar/calendarGoals.vue'
 import CalendarHeader from '@/components/calendar/calendarHeader.vue'
-import CalendarMetrics from '@/components/calendar/calendarMetrics.vue'
 import CalendarMonth from '@/components/calendar/calendarMonth.vue'
 import DashboardSideBar from '@/components/dashboard/dashboardSideBar.vue'
 
@@ -24,7 +23,6 @@ function goToToday() {
 
       <v-col cols="10" class="d-flex flex-column ga-5">
         <CalendarHeader @today="goToToday" />
-        <CalendarMetrics />
 
         <v-row class="flex-grow-1">
           <v-col cols="8">

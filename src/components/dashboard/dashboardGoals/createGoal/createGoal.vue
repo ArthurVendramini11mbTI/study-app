@@ -142,8 +142,8 @@
               <v-card-actions class="mr-4">
                 <v-spacer></v-spacer>
                 <v-btn text="Close" variant="plain" @click="createGoalCard = false"></v-btn>
-                <v-btn v-if="editingGoal" type="button" @click="deleteGoal()" text="Delete" color="red"></v-btn>
-                <v-btn  class="btn" type="submit">{{ editingGoal ? "Save" : "Create"}}</v-btn>
+                <v-btn v-if="editingGoal" type="button" @click="deleteGoal()" text="Delete" color="error"></v-btn>
+                <v-btn class="btn btn-primary" type="submit">{{ editingGoal ? "Save" : "Create"}}</v-btn>
               </v-card-actions>
             </v-form>
         </v-card-text>
@@ -158,10 +158,10 @@
   height: 80px;
 
 
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(var(--v-theme-surface-strong), 0.62) !important;
+  border: 1px solid rgba(var(--v-theme-border), 0.32);
 
-  color: rgb(181, 181, 181);
+  color: rgb(var(--v-theme-muted));
 
   transition: all 0.25s ease;
 }

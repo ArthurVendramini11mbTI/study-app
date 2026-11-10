@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { useRouter } from 'vue-router'
-import { logout } from '@/services/auth'
+import { logout, useCurrentUser } from '@/services/auth'
 
 const router = useRouter()
-
-const user = {
-  name: 'Arthur',
-}
+const currentUser = useCurrentUser()
 
 const navigation = [
   { title: 'Dashboard', icon: 'tabler:home', to: '/dashboard' },
@@ -78,7 +75,7 @@ async function handleLogout() {
           <!-- Profile -->
           <div class="mb-2">
             <v-list-item
-              :title="user.name"
+              :title="currentUser?.name || currentUser?.email || 'Axis user'"
               value="profile"
               class="item"
               prepend-avatar="https://randomuser.me/api/portraits/women/8.jpg"

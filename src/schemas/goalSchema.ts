@@ -1,5 +1,11 @@
 import { z } from 'zod'
 
+type GoalStatus = {
+  key: 'not-started' | 'in-progress' | 'almost-complete' | 'completed'
+  text: string
+  color: 'muted' | 'secondary' | 'primary' | 'accent'
+}
+
 export const GoalsSchema = z.array(
   z.object({
     title: z.string(),
@@ -30,22 +36,31 @@ export const GoalsSchema = z.array(
       minutes: Math.floor((goal.accumulated_seconds % 3600) / 60),
     };
 
-    let status;
+    let status: GoalStatus;
 
-    if (progress <= 15) {
+    if (goal.accumulated_seconds >= goal.target_seconds) {
       status = {
-        text: "Time to start!",
-        color: "warning",
+        key: 'completed',
+        text: 'Completed',
+        color: 'accent',
       };
-    } else if (progress <= 89) {
+    } else if (goal.accumulated_seconds === 0 && !goal.started_at) {
       status = {
-        text: "In progress",
-        color: "blue",
+        key: 'not-started',
+        text: 'Time to start',
+        color: 'muted',
+      };
+    } else if (progress >= 90) {
+      status = {
+        key: 'almost-complete',
+        text: 'Almost complete',
+        color: 'primary',
       };
     } else {
       status = {
-        text: "Almost done",
-        color: "success",
+        key: 'in-progress',
+        text: 'In progress',
+        color: 'secondary',
       };
     }
 

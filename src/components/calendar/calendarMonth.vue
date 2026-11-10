@@ -93,23 +93,23 @@ defineExpose({ goToToday })
 <style scoped>
 .month-title { min-width: 170px; text-align: center; }
 .calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
-.calendar-header { border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
-.weekday { padding: 10px 6px; text-align: center; font-size: 0.75rem; color: rgba(255, 255, 255, 0.55); }
+.calendar-header { border-bottom: 1px solid rgba(var(--v-theme-border), 0.24); }
+.weekday { padding: 10px 6px; text-align: center; font-size: 0.75rem; color: rgb(var(--v-theme-muted)); }
 
 .day-cell {
   position: relative;
   min-height: 74px;
   padding: 10px;
   border: 0;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(var(--v-theme-border), 0.16);
+  border-bottom: 1px solid rgba(var(--v-theme-border), 0.16);
   color: inherit;
   background: transparent;
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
-.day-cell:hover { background: rgba(255, 255, 255, 0.05); }
+.day-cell:hover { background: rgba(var(--v-theme-surface), 0.58); }
 .day-cell.selected { background: rgba(var(--v-theme-primary), 0.13); box-shadow: inset 0 0 0 1px rgba(var(--v-theme-primary), 0.45); }
 .day-cell.muted { opacity: 0.28; }
 .day-number { display: inline-grid; width: 28px; height: 28px; place-items: center; border-radius: 50%; font-size: 0.82rem; }

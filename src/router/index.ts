@@ -5,6 +5,7 @@ import sign from '@/pages/sign.vue'
 import dashboard from '@/pages/dashboard.vue'
 import calendar from '@/pages/calendar.vue'
 import section from '@/pages/section.vue'
+import settings from '@/pages/settings.vue'
 import { hasActiveSession } from '@/services/auth'
 
 const router = createRouter({
@@ -59,9 +60,8 @@ const router = createRouter({
     },
     {
       path: '/settings',
-      component: section,
+      component: settings,
       name: 'settings',
-      props: { title: 'Settings', icon: 'tabler:settings' },
       meta: { requiresAuth: true }
     }
   ],

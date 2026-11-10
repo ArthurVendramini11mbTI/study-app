@@ -103,7 +103,7 @@ import { Icon } from '@iconify/vue'
             <div class="d-flex align-center">
                 <v-sparkline
                     :model-value="values"
-                    color="blue"
+                    color="info"
                     :line-width="1"
                     :height="30"
                     :width="50"

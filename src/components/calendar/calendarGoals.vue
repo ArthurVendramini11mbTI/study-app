@@ -12,7 +12,8 @@ const selectedGoalId = ref<number | null>(null)
 const trackingLoading = ref(false)
 const trackingError = ref('')
 const now = ref(Date.now())
-const selectedGoal = computed(() => goals.value.find((goal) => goal.id === selectedGoalId.value) ?? goals.value[0])
+const availableGoals = computed(() => goals.value.filter((goal) => goal.status.key !== 'completed'))
+const selectedGoal = computed(() => availableGoals.value.find((goal) => goal.id === selectedGoalId.value) ?? availableGoals.value[0])
 const isSelectedGoalRunning = computed(() => Boolean(selectedGoal.value?.startedAt))
 const isSelectedGoalComplete = computed(() => {
   if (!selectedGoal.value) {
@@ -47,7 +48,10 @@ async function loadGoals() {
   try {
     const goalsFromAPI = await getGoalsService()
     goals.value = GoalsSchema.parse(goalsFromAPI)
-    selectedGoalId.value ??= goals.value[0]?.id ?? null
+
+    if (!availableGoals.value.some((goal) => goal.id === selectedGoalId.value)) {
+      selectedGoalId.value = availableGoals.value[0]?.id ?? null
+    }
   } catch (error) {
     console.error('Unable to fetch goals:', error)
   } finally {
@@ -63,6 +67,18 @@ function formatElapsedTime(totalSeconds: number) {
   return [hours, minutes, seconds]
     .map((value) => String(value).padStart(2, '0'))
     .join(':')
+}
+
+function getLiveProgress(goal: Goals[number]) {
+  const activeSessionSeconds = goal.startedAt
+    ? Math.max(0, Math.floor((now.value - goal.startedAt.getTime()) / 1000))
+    : 0
+  const currentSeconds = goal.accumulatedSeconds + activeSessionSeconds
+
+  return Math.min(
+    100,
+    Math.round((currentSeconds / goal.targetSeconds) * 100),
+  )
 }
 
 async function toggleTimeTracking() {
@@ -125,9 +141,9 @@ onBeforeUnmount(() => {
       <v-skeleton-loader v-for="item in 4" :key="item" type="list-item" class="goal-skeleton rounded-lg" />
     </div>
 
-    <div v-else-if="goals.length" class="goals-list d-flex flex-column ga-2">
+    <div v-else-if="availableGoals.length" class="goals-list d-flex flex-column ga-2">
       <button
-        v-for="goal in goals"
+        v-for="goal in availableGoals"
         :key="goal.id"
         type="button"
         class="goal-item"
@@ -139,9 +155,9 @@ onBeforeUnmount(() => {
         </div>
         <div class="flex-grow-1 overflow-hidden">
           <p class="goal-title text-body-2 text-truncate">{{ goal.title }}</p>
-          <v-progress-linear :model-value="goal.progress" :color="goal.color" height="5" rounded />
+          <v-progress-linear :model-value="getLiveProgress(goal)" :color="goal.color" height="5" rounded />
         </div>
-        <span class="goal-progress text-caption">{{ goal.progress }}%</span>
+        <span class="goal-progress text-caption">{{ getLiveProgress(goal) }}%</span>
         <Icon v-if="goal.startedAt" icon="tabler:player-record-filled" width="18" height="18" class="active-session-icon" />
         <Icon v-else-if="selectedGoalId === goal.id" icon="tabler:circle-check-filled" width="22" height="22" :style="{ color: goal.color }" />
       </button>
@@ -149,12 +165,14 @@ onBeforeUnmount(() => {
 
     <div v-else class="empty-goals">
       <div class="empty-goals-icon"><Icon icon="tabler:target-arrow" width="28" height="28" /></div>
-      <p class="font-weight-medium mt-3">No goals yet</p>
-      <p class="text-caption text-medium-emphasis mt-1">Create a goal to start tracking your focus time.</p>
+      <p class="font-weight-medium mt-3">{{ goals.length ? 'All goals completed' : 'No goals yet' }}</p>
+      <p class="text-caption text-medium-emphasis mt-1">
+        {{ goals.length ? 'Create a new goal to keep focusing.' : 'Create a goal to start tracking your focus time.' }}
+      </p>
       <v-btn to="/goals" variant="text" color="primary" class="mt-2">Create a goal</v-btn>
     </div>
 
-    <v-divider v-if="goals.length" class="my-5" />
+    <v-divider v-if="availableGoals.length" class="my-5" />
 
     <div v-if="selectedGoal" class="timer-panel">
       <div class="d-flex align-center ga-3 mb-4">
@@ -178,7 +196,7 @@ onBeforeUnmount(() => {
       </v-alert>
 
       <v-btn
-        class="btn rounded-lg w-100"
+        class="btn btn-primary rounded-lg w-100"
         :class="{ 'stop-btn': isSelectedGoalRunning }"
         size="large"
         :loading="trackingLoading"
@@ -195,7 +213,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .goals-card { min-height: 585px; }
 .goals-list { max-height: 330px; overflow-y: auto; scrollbar-width: thin; }
-.goal-skeleton { height: 56px; background: rgba(255, 255, 255, 0.035); }
+.goal-skeleton { height: 56px; background: rgba(var(--v-theme-surface-strong), 0.42); }
 .empty-goals { min-height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 .empty-goals-icon { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 16px; color: rgb(var(--v-theme-primary)); background: rgba(var(--v-theme-primary), 0.12); }
 
@@ -206,16 +224,16 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 12px;
   padding: 7px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(var(--v-theme-border), 0.22);
   border-radius: 14px;
   color: inherit;
   text-align: left;
-  background: rgba(255, 255, 255, 0.035);
+  background: rgba(var(--v-theme-surface-strong), 0.42);
   cursor: pointer;
   transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
-.goal-item:hover { transform: translateY(-1px); background: rgba(255, 255, 255, 0.06); }
+.goal-item:hover { transform: translateY(-1px); background: rgba(var(--v-theme-surface), 0.68); }
 .goal-item.selected { border-color: rgba(var(--v-theme-primary), 0.5); background: rgba(var(--v-theme-primary), 0.1); }
 .goal-icon, .timer-goal-icon { flex: 0 0 auto; display: grid; place-items: center; border-radius: 12px; }
 .goal-icon { width: 40px; height: 40px; }
@@ -228,7 +246,7 @@ onBeforeUnmount(() => {
   padding: 16px;
   border: 1px solid rgba(var(--v-theme-primary), 0.2);
   border-radius: 16px;
-  background: linear-gradient(145deg, rgba(var(--v-theme-primary), 0.11), rgba(255, 255, 255, 0.025));
+  background: linear-gradient(145deg, rgba(var(--v-theme-primary), 0.11), rgba(var(--v-theme-surface), 0.34));
 }
 
 .timer-value {

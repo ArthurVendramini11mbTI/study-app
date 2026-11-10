@@ -73,7 +73,7 @@ function confirmSelection() {
 
       <div class="d-flex justify-end ga-2 mt-5">
         <v-btn variant="text" @click="selectIconCard = false">Cancel</v-btn>
-        <v-btn class="btn" @click="confirmSelection"><Icon icon="tabler:check" width="18" height="18" class="me-2" />Select</v-btn>
+        <v-btn class="btn btn-primary" @click="confirmSelection"><Icon icon="tabler:check" width="18" height="18" class="me-2" />Select</v-btn>
       </div>
 
     </v-card>
@@ -121,7 +121,7 @@ function confirmSelection() {
 
   border-radius: 50%;
 
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(var(--v-theme-border), 0.48);
 }
 
 .preview {
@@ -135,8 +135,8 @@ function confirmSelection() {
 
   border-radius: 14px;
 
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(var(--v-theme-surface-strong), 0.38);
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(var(--v-theme-border), 0.22);
 }
 </style>
