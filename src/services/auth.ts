@@ -1,5 +1,5 @@
 import type { userType } from "@/types/userTypes";
-import { jwtDecode } from "jwt-decode";
+import { getErrorMessage } from './api'
 
 export async function login(userData: userType) {
   const response = await fetch("http://localhost:5000/users/login", {
@@ -9,11 +9,13 @@ export async function login(userData: userType) {
       "Content-Type": "application/json",
     },
 
+    credentials: 'include',
+
     body: JSON.stringify(userData),
   });
 
   if (!response.ok) {
-    throw new Error("Invalid email or password");
+    throw new Error(await getErrorMessage(response, "Invalid email or password"));
   }
 
   return response.json();
@@ -27,30 +29,34 @@ export async function sign(userData: userType) {
       "Content-Type": "application/json",
     },
 
+    credentials: 'include',
+
     body: JSON.stringify(userData),
   });
 
   if (!response.ok) {
-    throw new Error("Invalid email or password");
+    throw new Error(await getErrorMessage(response, "Unable to create account"));
   }
 
   return response.json();
 }
 
-type JwtPayload = {
-  sub: string;
-  iat: number;
-  exp: number;
-};
+export async function hasActiveSession() {
+  try {
+    const response = await fetch("http://localhost:5000/users/session", {
+      method: 'GET',
+      credentials: 'include',
+    })
 
-export function getUserId() {
-  const token = localStorage.getItem("token");
-
-  if (!token) {
-    return null;
+    return response.ok
+  } catch {
+    return false
   }
+}
 
-  const payload = jwtDecode<JwtPayload>(token);
-
-  return Number(payload.sub);
+export async function logout() {
+  await fetch("http://localhost:5000/users/logout", {
+    method: 'POST',
+    credentials: 'include',
+  })
 }

@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+import { useRouter } from 'vue-router'
+import { logout } from '@/services/auth'
+
+const router = useRouter()
 
 const user = {
   name: 'Arthur',
@@ -13,6 +17,11 @@ const navigation = [
   { title: 'Progress', icon: 'tabler:chart-line', to: '/progress' },
   { title: 'Settings', icon: 'tabler:settings', to: '/settings' },
 ]
+
+async function handleLogout() {
+  await logout()
+  await router.replace('/')
+}
 </script>
 
 <template>
@@ -74,6 +83,11 @@ const navigation = [
               class="item"
               prepend-avatar="https://randomuser.me/api/portraits/women/8.jpg"
             />
+            <v-list-item title="Log out" class="item mt-1" rounded="lg" @click="handleLogout">
+              <template #prepend>
+                <Icon icon="tabler:logout" width="24" height="24" />
+              </template>
+            </v-list-item>
           </div>
         </v-list>
       </v-navigation-drawer>

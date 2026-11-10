@@ -5,6 +5,7 @@ import sign from '@/pages/sign.vue'
 import dashboard from '@/pages/dashboard.vue'
 import calendar from '@/pages/calendar.vue'
 import section from '@/pages/section.vue'
+import { hasActiveSession } from '@/services/auth'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -66,11 +67,15 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to) => {
-  const token = localStorage.getItem("token");
+router.beforeEach(async (to) => {
+  const isAuthenticated = await hasActiveSession()
 
-  if (to.meta.requiresAuth && !token) {
+  if (to.meta.requiresAuth && !isAuthenticated) {
     return "/";
+  }
+
+  if ((to.name === 'login' || to.name === 'sign') && isAuthenticated) {
+    return '/dashboard'
   }
 });
 

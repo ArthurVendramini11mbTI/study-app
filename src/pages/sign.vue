@@ -6,10 +6,12 @@
     const email = ref<string>('')
     const password = ref<string>('')
 
-    const form = ref()
+    const form = ref<{ validate: () => Promise<{ valid: boolean }> } | null>(null)
+    const errorMessage = ref('')
+    const loading = ref(false)
 
     const emailRules = [
-        (value: boolean) => {
+        (value: string) => {
             return value ? true : 'You must enter an email'
         },
 
@@ -21,26 +23,38 @@
     ]
 
     const passwordRules = [
-        (value: boolean) => {
+        (value: string) => {
             return value ? true : 'You must enter an password'
         },
 
         (value: string) => {
-            return value.length >= 6 ? true : 'Your password must have more than 5 digits'
+            return value.length >= 8 ? true : 'Your password must have at least 8 characters'
+        },
+
+        (value: string) => {
+            return value.length <= 72 ? true : 'Your password must have at most 72 characters'
         }
     ]
 
     async function handleSign() {
+        const validation = await form.value?.validate()
+
+        if (!validation?.valid || loading.value) {
+            return
+        }
+
         const userData = {email: email.value, password: password.value}
+        errorMessage.value = ''
+        loading.value = true
 
         try {
-            const data = await sign(userData);
-
-            localStorage.setItem("token", data.token);
+            await sign(userData);
 
             router.push({ name: 'dashboard'})
-        } catch {
-            console.log("Invalid email or password")
+        } catch (error) {
+            errorMessage.value = error instanceof Error ? error.message : 'Unable to create account'
+        } finally {
+            loading.value = false
         }
     }
 </script>
@@ -53,10 +67,12 @@
                 <template v-slot:title > <span class="font-weight-black" >Sign in to Axis App</span> </template>
                 <v-card-text class="w-100 mt-5">
                     <v-form @submit.prevent='handleSign' ref="form">
-                    <v-text-field label="Email" v-model="email" :rules="emailRules"></v-text-field>
-                    <v-text-field label="Password" v-model="password" :rules="passwordRules"></v-text-field>
+                    <v-text-field label="Email" v-model.trim="email" :rules="emailRules" autocomplete="email"></v-text-field>
+                    <v-text-field label="Password" v-model="password" :rules="passwordRules" type="password" autocomplete="new-password"></v-text-field>
 
-                    <v-btn type="submit" class="w-100 mt-5" variant="outlined">Submit</v-btn>
+                    <v-alert v-if="errorMessage" type="error" variant="tonal" density="compact">{{ errorMessage }}</v-alert>
+
+                    <v-btn type="submit" class="w-100 mt-5" variant="outlined" :loading="loading">Submit</v-btn>
                     
                     <v-chip variant="text" class="mt-2">Already have an account?<router-link to="/" class="ml-1">Log in</router-link></v-chip>
                     </v-form>
