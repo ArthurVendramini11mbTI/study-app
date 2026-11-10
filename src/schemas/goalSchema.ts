@@ -56,6 +56,8 @@ export const GoalsSchema = z.array(
       color: goal.color,
       id: goal.id,
       startedAt: goal.started_at ? new Date(goal.started_at) : null,
+      targetSeconds: goal.target_seconds,
+      accumulatedSeconds: goal.accumulated_seconds,
 
       progress,
       status,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { Icon } from '@iconify/vue'
 import { GoalsSchema } from '@/schemas/goalSchema'
 import { getGoalsService, trackGoalTimeService } from '@/services/goalService'
@@ -14,12 +14,31 @@ const trackingError = ref('')
 const now = ref(Date.now())
 const selectedGoal = computed(() => goals.value.find((goal) => goal.id === selectedGoalId.value) ?? goals.value[0])
 const isSelectedGoalRunning = computed(() => Boolean(selectedGoal.value?.startedAt))
+const isSelectedGoalComplete = computed(() => {
+  if (!selectedGoal.value) {
+    return false
+  }
+
+  return selectedGoal.value.accumulatedSeconds >= selectedGoal.value.targetSeconds
+})
 const sessionElapsedSeconds = computed(() => {
   if (!selectedGoal.value?.startedAt) {
     return 0
   }
 
   return Math.max(0, Math.floor((now.value - selectedGoal.value.startedAt.getTime()) / 1000))
+})
+const remainingSeconds = computed(() => {
+  if (!selectedGoal.value) {
+    return 0
+  }
+
+  return Math.max(
+    0,
+    selectedGoal.value.targetSeconds
+      - selectedGoal.value.accumulatedSeconds
+      - sessionElapsedSeconds.value
+  )
 })
 
 let timerInterval: ReturnType<typeof setInterval> | undefined
@@ -47,7 +66,11 @@ function formatElapsedTime(totalSeconds: number) {
 }
 
 async function toggleTimeTracking() {
-  if (!selectedGoal.value || trackingLoading.value) {
+  if (
+    !selectedGoal.value
+    || trackingLoading.value
+    || (isSelectedGoalComplete.value && !isSelectedGoalRunning.value)
+  ) {
     return
   }
 
@@ -65,6 +88,16 @@ async function toggleTimeTracking() {
     trackingLoading.value = false
   }
 }
+
+watch(sessionElapsedSeconds, () => {
+  if (
+    isSelectedGoalRunning.value
+    && remainingSeconds.value === 0
+    && !trackingLoading.value
+  ) {
+    toggleTimeTracking()
+  }
+})
 
 onMounted(() => {
   loadGoals()
@@ -135,7 +168,10 @@ onBeforeUnmount(() => {
       </div>
 
       <p class="timer-value">{{ formatElapsedTime(sessionElapsedSeconds) }}</p>
-      <p class="text-caption text-medium-emphasis text-center mb-4">Your time will be added to this goal</p>
+      <p class="text-caption text-medium-emphasis text-center mb-4">
+        <template v-if="isSelectedGoalComplete">Goal completed</template>
+        <template v-else>{{ formatElapsedTime(remainingSeconds) }} remaining</template>
+      </p>
 
       <v-alert v-if="trackingError" type="error" variant="tonal" density="compact" class="mb-3">
         {{ trackingError }}
@@ -146,10 +182,11 @@ onBeforeUnmount(() => {
         :class="{ 'stop-btn': isSelectedGoalRunning }"
         size="large"
         :loading="trackingLoading"
+        :disabled="isSelectedGoalComplete && !isSelectedGoalRunning"
         @click="toggleTimeTracking"
       >
         <Icon :icon="isSelectedGoalRunning ? 'tabler:player-stop-filled' : 'tabler:player-play-filled'" width="19" height="19" class="me-2" />
-        {{ isSelectedGoalRunning ? 'Stop focus' : 'Start focus' }}
+        {{ isSelectedGoalRunning ? 'Stop focus' : isSelectedGoalComplete ? 'Goal completed' : 'Start focus' }}
       </v-btn>
     </div>
   </v-card>
